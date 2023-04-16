@@ -1,0 +1,66 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 21px;
+  margin: 0 auto;
+
+  .item-image {
+    background-color: #F1F2F3;
+    position: relative;
+    max-width: 262px;
+    max-height: 360px;
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    .item-status {
+      position: absolute;
+      max-width: 45px;
+      max-height: 20px;
+      width: 100%;
+      height: 100%;
+      left: 20px;
+      top: 20px;
+    }
+
+    .like {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+    }
+  }
+
+  .card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    color: #444444;
+
+    .item-name {
+      font-weight: normal;
+      font-size: 16px;
+    }
+
+    .prices {
+      display: flex;
+      flex-direction: row;
+      gap: 18px;
+      align-items: flex-end;
+      justify-content: flex-start;
+
+      .current-price {
+        font-size: 20px;
+      }
+
+      .old-price {
+        font-weight: 300;
+        font-size: 16px;
+        text-decoration-line: line-through;
+      }
+    }
+  }
+}

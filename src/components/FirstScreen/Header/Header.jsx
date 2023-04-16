@@ -1,11 +1,13 @@
-import { useState } from 'react'
+import React from 'react'
 import './style.css'
 import './style.scss'
 
 export default function Header() {
+  const liked = 0;
+  const selected = 0;
 
-  const [liked, setLiked] = useState(0)
-  const [selected, setSelected] = useState(0)
+  // const [liked, setLiked] = useState(0)
+  // const [selected, setSelected] = useState(0)
 
 
   return (
