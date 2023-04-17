@@ -1,3 +1,9 @@
+button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
 .card {
   display: flex;
   flex-direction: column;
@@ -30,7 +36,7 @@
     .like {
       position: absolute;
       right: 20px;
-      top: 20px;
+      top: 20px;   
     }
   }
 
