@@ -32,8 +32,8 @@ export default function Products() {
           </div>
 
           <div className='sort'>
-            <select className='select'>
-              <option selected value='relevance'>By relevance</option>
+            <select defaultValue={'relevance'} className='select'>
+              <option value='relevance'>By relevance</option>
               <option value='cheap'>From cheap to expensive</option>
               <option value='expensive'>From expensive to cheap</option>
               <option value='new'>New products</option>

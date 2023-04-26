@@ -10,7 +10,10 @@
 .page {
   opacity: .5;
   border-bottom: 3px solid #000;
-  
+}
+
+.page:hover {
+  opacity: 1;
 }
 
 .currentPage {
