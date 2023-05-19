@@ -8,22 +8,22 @@ export default function Content() {
       <div className='inner-content'>
         <div className='right-block'>
           <section className='dots'>
-            <img src="/img/vector.png" alt="dots"/>
           </section>
 
           <section className='content-block'>
-            <h1>Shop</h1>
+            <section className='inner-text'>
+              <h1>Shop</h1>
 
-            <section>
-              <span className='maintext blacktext'>Home</span>
-              <span className='maintext redtext'>Shop</span>
+              <section>
+                <span className='maintext blacktext'>Home</span>
+                <span className='maintext redtext'>Shop</span>
+              </section>
             </section>
-          </section>
-
-          <section className='line'>
 
           </section>
 
+
+          {/* <section className='line'></section> */}
         </div>
 
         <div className='left-block'>

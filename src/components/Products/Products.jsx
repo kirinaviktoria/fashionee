@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import data from '../../products.json'
 import './style.scss'
 import Card from './card/Card';
-import Pagination from './Pagination/Pagination';
+import Pagination from '../Pagination/Pagination';
 
 const PRODUCTS_PER_PAGE = 12
 
@@ -21,10 +21,6 @@ export default function Products() {
 
   return(
     <section className='wrapper blocks'>
-      <section className='sidebar'>
-
-      </section>
-
       <section className='products'>
         <div className='header'>
           <div className='amount'>
