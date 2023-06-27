@@ -13,6 +13,8 @@ export default function Products() {
   const lastIndex = firstIndex + PRODUCTS_PER_PAGE
   const totalPages = data.products.length / PRODUCTS_PER_PAGE;
 
+
+// Добавить функцию обработки фильтра и сортировки
   const slicedCards = data.products.slice(firstIndex, lastIndex)
 
   const changeCurPage = (page) => {
