@@ -1,10 +1,9 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './style.scss'
 import { ReactComponent as Sale } from '../../../img/sale.svg'
 import { ReactComponent as New } from '../../../img/new.svg'
 import { ReactComponent as Like } from '../../../img/like.svg'
 import { ReactComponent as Liked } from '../../../img/liked.svg'
-
 
 export default function Card({ product }) {
   const [like, setLike] = useState(false)
@@ -12,11 +11,17 @@ export default function Card({ product }) {
  
   const handleClick = () => {
     setLike(!like);
+
+    // localStorage.setItem('favourite', JSON.stringify(product))
   }
 
   const addToCart = () => {
     setAdd(!add);
   }
+
+  useEffect (() =>{
+    localStorage.setItem('favourite', JSON.stringify(product))
+  }, [like])
 
   return (
     <section className='card'>
