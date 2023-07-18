@@ -11,7 +11,6 @@ export default function Card({ product }) {
  
   const handleClick = () => {
     setLike(!like);
-
     // localStorage.setItem('favourite', JSON.stringify(product))
   }
 
