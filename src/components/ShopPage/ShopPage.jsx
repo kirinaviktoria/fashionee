@@ -1,5 +1,4 @@
-import './content.scss'
-
+import './style.scss'
 
 export default function Content() {
 
@@ -7,8 +6,7 @@ export default function Content() {
     <div className="wrapper">
       <div className='inner-content'>
         <div className='right-block'>
-          <section className='dots'>
-          </section>
+          <section className='dots'/>
 
           <section className='content-block'>
             <section className='inner-text'>

@@ -3,7 +3,6 @@ import './style.scss'
 import { ReactComponent as Sale } from '../../../img/sale.svg'
 import { ReactComponent as New } from '../../../img/new.svg'
 import { ReactComponent as Like } from '../../../img/like.svg'
-import { ReactComponent as Liked } from '../../../img/liked.svg'
 
 export default function Card({ product }) {
   const [like, setLike] = useState(false)
@@ -31,14 +30,12 @@ export default function Card({ product }) {
         {
           (product.isSale || product.isNew) && <div className='item-status'>
             {product.isSale && <Sale />}
-
             {product.isNew && <New />}
           </div>
         }
 
         <button onClick={() => handleClick()} className='like'>
-          {!like && <Like />}
-          {like && <Liked />}
+          {<Like className={`${like ? 'active': ''}`} />}
         </button>
       </div>
 

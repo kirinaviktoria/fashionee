@@ -1,6 +1,6 @@
 import React, { useReducer } from "react";
 import Header from "./components/Header/Header";
-import Content from "./components/ShopPage/Content/Content";
+import ShopPage from "./components/ShopPage/ShopPage";
 import Products from "./components/Products/Products";
 import {ProductsContext} from './context/ProductsContext'
 import { ACTIONS, reduser, initialState } from "./redusers/reducer";
@@ -13,7 +13,7 @@ function App() {
     <ProductsContext.Provider value={{ dispatch, state }}>
       <div className="App">
         <Header />
-        <Content />
+        <ShopPage />
         <Products />
       </div>
     </ProductsContext.Provider>
