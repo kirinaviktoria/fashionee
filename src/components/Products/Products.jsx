@@ -149,32 +149,34 @@ export default function Products() {
     // else filtered = data.products
     // console.log(filtered)
 
-    switch (filterMethod) {
-      case CATEGORIES.ALL:    
-        filtered = products
-        break
-  
-      case CATEGORIES.MEN:
-        filtered = products.filter(prod => prod.categories.includes('Men'))
-        console.log(filtered)
-        break
-  
-      case CATEGORIES.WOMEN:
-        filtered = products.filter(prod => prod.categories.includes('Women'))
-        break
-  
-      case CATEGORIES.ACC:
-        filtered = products.filter(prod => prod.categories.includes('Accessories'))
-        break
-  
-      case CATEGORIES.NEW:
-        filtered = products.filter(prod => prod.isNew == 1)
-        break
+    if (filterMen ||  filterWomen || filterAcc || filterNew) {
 
-      default:
-        filtered = data.products
+      switch (filterMethod) {
+        case CATEGORIES.ALL:    
+          filtered = products
+          break
+    
+        case CATEGORIES.MEN:
+          filtered = products.filter(prod => prod.categories.includes('Men'))
+          console.log(filtered)
+          break
+    
+        case CATEGORIES.WOMEN:
+          filtered = products.filter(prod => prod.categories.includes('Women'))
+          break
+    
+        case CATEGORIES.ACC:
+          filtered = products.filter(prod => prod.categories.includes('Accessories'))
+          break
+    
+        case CATEGORIES.NEW:
+          filtered = products.filter(prod => prod.isNew == 1)
+          break
+  
+        default:
+          filtered = data.products
+      }
     }
-
             
     slisedCards = filtered.slice(firstIndex, lastIndex)
     // setProducts(filtered)
@@ -206,7 +208,7 @@ export default function Products() {
   }
 
   // useEffect(() => {
-  //   setProducts(filterCards())
+  //   setProducts(filterCards(filterMethod))
   // }, [filterMethod])
 
 
@@ -215,9 +217,9 @@ export default function Products() {
   }
 
   const changeFilterMethod = (e) => {
-    setFilterMethod(e.target.value)
+    // setFilterMethod(e.target.value)
     // console.log(filterMethod)
-    // e.target.value ? setFilterMethod(e.target.value) : setFilterMethod(filterMethod)
+    // e.target.value ? setFilterMethod(e.target.value) : setProducts(filterCards(filterMethod))
     
   }
 
@@ -265,7 +267,7 @@ export default function Products() {
                   <input type='checkbox' name='sortWomen' value={CATEGORIES.WOMEN} checked={filterWomen} 
                     onChange={(e) => {
                       setFilterWomen(!filterWomen)
-                      // changeFilterMethod(e)
+                      changeFilterMethod(e)
                       
                       // changeFilterMethod(e.target.value)
                       // checked ? changeFilterMethod(e.target.value) : changeFilterMethod(null)
