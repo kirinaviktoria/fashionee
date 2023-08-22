@@ -38,11 +38,11 @@ export default function Products() {
   const [products, setProducts] = useState(data.products)
   const [sortMethod, setSortMethod] = useState(SORTING.RELEVANCE)
   const [filterMethod, setFilterMethod] = useState(null)
-  const [filterAll, setFilterAll] = useState(0)
-  const [filterMen, setFilterMen] = useState(0)
-  const [filterWomen, setFilterWomen] = useState(0)
-  const [filterAcc, setFilterAcc] = useState(0)
-  const [filterNew, setFilterNew] = useState(0)
+  const [filterAll, setFilterAll] = useState(false)
+  const [filterMen, setFilterMen] = useState(false)
+  const [filterWomen, setFilterWomen] = useState(false)
+  const [filterAcc, setFilterAcc] = useState(false)
+  const [filterNew, setFilterNew] = useState(false)
 
   const [checked, setChecked] = useState(0)
 
@@ -126,7 +126,7 @@ export default function Products() {
   }
 
   //!! Добавить функцию обработки фильтра и сортировки
-  const filterCards = (filterMethod) => { 
+  const filterCards = () => { 
     let filtered = products 
 
     // if (filterAll && filterMethod == CATEGORIES.ALL) {
@@ -149,33 +149,13 @@ export default function Products() {
     // else filtered = data.products
     // console.log(filtered)
 
-    if (filterMen ||  filterWomen || filterAcc || filterNew) {
-
-      switch (filterMethod) {
-        case CATEGORIES.ALL:    
-          filtered = products
-          break
-    
-        case CATEGORIES.MEN:
-          filtered = products.filter(prod => prod.categories.includes('Men'))
-          console.log(filtered)
-          break
-    
-        case CATEGORIES.WOMEN:
-          filtered = products.filter(prod => prod.categories.includes('Women'))
-          break
-    
-        case CATEGORIES.ACC:
-          filtered = products.filter(prod => prod.categories.includes('Accessories'))
-          break
-    
-        case CATEGORIES.NEW:
-          filtered = products.filter(prod => prod.isNew == 1)
-          break
-  
-        default:
-          filtered = data.products
-      }
+    if (filterAll || filterMen ||  filterWomen || filterAcc || filterNew) {
+      if(filterAll) filtered = data.products
+      else if(filterMen) filtered = data.products.filter(prod => prod.categories.includes('Men'))
+      else if(filterWomen) filtered = data.products.filter(prod => prod.categories.includes('Women'))
+      else if(filterAcc) filtered = data.products.filter(prod => prod.categories.includes('Accessories'))
+      else if(filterNew) filtered = data.products.filter(prod => prod.isNew == 1)
+      else filtered = data.products
     }
             
     slisedCards = filtered.slice(firstIndex, lastIndex)
@@ -207,9 +187,9 @@ export default function Products() {
     sorted.forEach(sort => console.log('sorted:', sort))
   }
 
-  // useEffect(() => {
-  //   setProducts(filterCards(filterMethod))
-  // }, [filterMethod])
+  useEffect(() => {
+    setProducts(filterCards())
+  }, [filterAll, filterMen, filterWomen, filterAcc, filterNew])
 
 
   const changeCurPage = (page) => {
@@ -248,7 +228,7 @@ export default function Products() {
                   <input type='checkbox' name='sortAll' value={CATEGORIES.ALL} checked={filterAll} 
                     onChange={() => {
                       setFilterAll(!filterAll)
-                      changeFilterMethod(CATEGORIES.ALL)
+                      // setProducts(filterCards())
                     }} 
                   />
                   {CATEGORIES.ALL}
@@ -257,8 +237,7 @@ export default function Products() {
                   <input type='checkbox' name='sortMen' value={CATEGORIES.MEN} checked={filterMen} 
                     onChange={(e) => {
                       setFilterMen(!filterMen)
-                      // changeFilterMethod()
-                      filterCards()
+                      // setProducts(filterCards())
                     }} 
                   />
                   {CATEGORIES.MEN}
@@ -267,10 +246,7 @@ export default function Products() {
                   <input type='checkbox' name='sortWomen' value={CATEGORIES.WOMEN} checked={filterWomen} 
                     onChange={(e) => {
                       setFilterWomen(!filterWomen)
-                      changeFilterMethod(e)
-                      
-                      // changeFilterMethod(e.target.value)
-                      // checked ? changeFilterMethod(e.target.value) : changeFilterMethod(null)
+                      // setProducts(filterCards())                      
                     }}  
                   />
                   {CATEGORIES.WOMEN}
@@ -279,8 +255,7 @@ export default function Products() {
                   <input type='checkbox' name='sortAcc' value={CATEGORIES.ACC} checked={filterAcc} 
                     onChange={(e) => {
                       setFilterAcc(!filterAcc)
-                      // changeFilterMethod(e)
-                      // checked ? changeFilterMethod(e.target.value) : changeFilterMethod(null)
+                      // setProducts(filterCards())
                     }}  
                   />
                   {CATEGORIES.ACC}
@@ -289,7 +264,7 @@ export default function Products() {
                   <input type='checkbox' name='sortNew' value={CATEGORIES.NEW} checked={filterNew} 
                   onChange={(e) => {
                     setFilterNew(!filterNew)
-                    // changeFilterMethod(e)
+                    // setProducts(filterCards())
                   }} 
                   />
                   {CATEGORIES.NEW}
