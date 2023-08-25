@@ -1,7 +1,13 @@
+button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
 .card {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 21px;
   margin: 0 auto;
 
@@ -30,13 +36,19 @@
     .like {
       position: absolute;
       right: 20px;
-      top: 20px;
+      top: 20px;   
+    }
+
+    .active path {
+      fill: #FF8E8E;
     }
   }
 
   .card-info {
+    height: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     gap: 9px;
     color: #444444;
 
@@ -45,21 +57,46 @@
       font-size: 16px;
     }
 
-    .prices {
+    .card-bottom {
       display: flex;
       flex-direction: row;
-      gap: 18px;
-      align-items: flex-end;
-      justify-content: flex-start;
+      justify-content: space-between;
 
-      .current-price {
-        font-size: 20px;
+      .prices {
+        display: flex;
+        flex-direction: row;
+        gap: 18px;
+        align-items: flex-end;
+        justify-content: flex-start;
+
+        .current-price {
+          font-size: 20px;
+        }
+
+        .old-price {
+          font-weight: 300;
+          font-size: 16px;
+          text-decoration-line: line-through;
+        }
       }
 
-      .old-price {
-        font-weight: 300;
-        font-size: 16px;
-        text-decoration-line: line-through;
+      .addBtn {
+        max-width: 40px;
+        width: 100%;
+        border-radius: 10px;
+        background-color: #95CCB5;
+        color: #fff;
+        font-size: 24px;
+        align-items: center;
+        transition: all 0.2s ease;
+      }
+
+      .added {
+        background-color: #4c7d69;
+      }
+
+      .addBtn:hover {
+        background-color: #4c7d69;
       }
     }
   }

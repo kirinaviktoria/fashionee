@@ -1,32 +1,23 @@
-import React, { useEffect, useReducer } from "react";
-import Header from "./components/FirstScreen/Header/Header";
-import Content from "./components/FirstScreen/Content/Content";
-import { ACTIONS, initialState, reduser } from "./redusers/reducer";
-import data from './products.json'
-import ProductsContext from "./context/ProductsContext";
+import React, { useReducer } from "react";
+import Header from "./components/Header/Header";
+import ShopPage from "./components/ShopPage/ShopPage";
 import Products from "./components/Products/Products";
+import {ProductsContext} from './context/ProductsContext'
+import { ACTIONS, reduser, initialState } from "./redusers/reducer";
 
 function App() {
-  const [state, dispatch] = useReducer(reduser, initialState);
 
-  useEffect(() => {
-    fetch(data.products)
-    .then(responce => responce.json())
-    .then(json => dispatch({
-      type: ACTIONS.SET_PRODUCTS,
-      payload: { products: json }
-    }))
-  }, [dispatch])
+  const [state, dispatch] = useReducer(reduser, initialState)
 
   return (
-    <ProductsContext.Provider value={{ dispatch, state }}> 
-    <div className="App">
-      <Header/>
-      <Content/>
-      <Products/>
-    </div>
-    {console.log(data.products.length)}
+    <ProductsContext.Provider value={{ dispatch, state }}>
+      <div className="App">
+        <Header />
+        <ShopPage />
+        <Products />
+      </div>
     </ProductsContext.Provider>
+
   );
 }
 
