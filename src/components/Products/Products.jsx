@@ -169,8 +169,6 @@ export default function Products() {
              
     slisedCards = sorted.slice(firstIndex, lastIndex)
 
-    
-
     return sorted
   }
 
@@ -224,7 +222,7 @@ export default function Products() {
             <div className='sort'>
               <select value={sortMethod} className='select' onChange={e => setSortMethod(e.target.value)}>
                 <option value={SORTING.RELEVANCE}>By relevance</option>
-                <option value={'cheap'}>From cheap to expensive</option>
+                <option value={SORTING.CHEAP}>From cheap to expensive</option>
                 <option value={SORTING.EXPENSIVE}>From expensive to cheap</option>
                 <option value={SORTING.NEW}>New products</option>
                 <option value={SORTING.DISCOUNT}>Discount goods</option>
