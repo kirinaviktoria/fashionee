@@ -13,8 +13,10 @@ function App() {
     <ProductsContext.Provider value={{ dispatch, state }}>
       <div className="App">
         <Header />
-        <ShopPage />
-        <Products />
+        <div className="content"> 
+          <ShopPage />
+          <Products />
+        </div>
       </div>
     </ProductsContext.Provider>
 

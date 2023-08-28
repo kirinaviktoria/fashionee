@@ -1,7 +1,7 @@
 import React, { useEffect, useReducer, useState } from 'react';
 import data from '../../products.json'
 import './style.scss'
-import Card from './Card/Card';
+import Card from './Сard/Card';
 import Pagination from '../Pagination/Pagination';
 // import {ProductsContext} from '../../context/ProductsContext'
 // import { ACTIONS, reduser, initialState } from '../../redusers/reducer';
@@ -44,6 +44,12 @@ export default function Products() {
   const [filterAcc, setFilterAcc] = useState(false)
   const [filterNew, setFilterNew] = useState(false)
 
+  const [colorBlack, setColorBlack] = useState(false)
+  const [colorBlue, setColorBlue] = useState(false)
+  const [colorRed, setColorRed] = useState(false)
+  const [colorYellow, setColorYellow] = useState(false)
+  const [colorGreen, setColorGreen] = useState(false)
+
   const [checked, setChecked] = useState(0)
 
   const [curPage, setCurPage] = useState(1)
@@ -70,24 +76,23 @@ export default function Products() {
         case SORTING.CHEAP:
           setProducts(data.products.sort((prod1, prod2) => prod1.price > prod2.price ? 1 : -1))
           break
-              
+
         case SORTING.EXPENSIVE:
           setProducts(data.products.sort((prod1, prod2) => prod1.price < prod2.price ? 1 : -1))
           break
-    
+
         case SORTING.NEW:
           setProducts(data.products.sort((prod1, prod2) => prod1.isNew < prod2.isNew ? 1 : -1))
           break
-    
+
         case SORTING.DISCOUNT:
           setProducts(data.products.sort((prod1, prod2) => prod1.isSale < prod2.isSale ? 1 : -1))
           break
-    
+
         default:
           setProducts(data.products)
       }
     }
-             
     return slisedCards = products.slice(firstIndex, lastIndex)
   }
 
@@ -96,23 +101,23 @@ export default function Products() {
     let filtered = []
 
     switch (filterMethod) {
-      case CATEGORIES.ALL:    
+      case CATEGORIES.ALL:
         filtered = data.products
         break
-  
+
       case CATEGORIES.MEN:
         filtered = products.filter(prod => prod.categories.includes('Men'))
         console.log(filtered)
         break
-  
+
       case CATEGORIES.WOMEN:
         filtered = products.filter(prod => prod.categories.includes('Women'))
         break
-  
+
       case CATEGORIES.ACC:
         filtered = products.filter(prod => prod.categories.includes('Accessories'))
         break
-  
+
       case CATEGORIES.NEW:
         filtered = products.filter(prod => prod.isNew == 1)
         break
@@ -120,17 +125,17 @@ export default function Products() {
       default:
         filtered = data.products
     }
-           
+
     slisedCards = filtered.slice(firstIndex, lastIndex)
     return filtered
   }
 
   //!! Добавить функцию обработки фильтра и сортировки
-  const filterCards = (sortMethod) => { 
-    let filtered = data.products 
+  const filterCards = (sortMethod) => {
+    let filtered = data.products
     let sorted = []
 
-    if (filterAll || filterMen ||  filterWomen || filterAcc || filterNew || sortMethod) {
+    if (filterAll || filterMen || filterWomen || filterAcc || filterNew || sortMethod) {
       if (filterMen) filtered = data.products.filter(prod => prod.categories.includes('Men'))
       else if (filterWomen) filtered = data.products.filter(prod => prod.categories.includes('Women'))
       else if (filterAcc) filtered = data.products.filter(prod => prod.categories.includes('Accessories'))
@@ -141,165 +146,186 @@ export default function Products() {
 
     // else filtered = data.products
     console.log(sortMethod);
-    
-      switch (sortMethod) {
-        case SORTING.RELEVANCE:
-          sorted = filtered.sort((prod1, prod2) => prod1.id > prod2.id ? 1 : -1)
-          break
 
-        case SORTING.CHEAP:
-          sorted = filtered.sort((prod1, prod2) => prod1.price > prod2.price ? 1 : -1)
-          break
-              
-        case SORTING.EXPENSIVE:
-          sorted = filtered.sort((prod1, prod2) => prod1.price < prod2.price ? 1 : -1)
-          break
-    
-        case SORTING.NEW:
-          sorted = filtered.sort((prod1, prod2) => prod1.isNew < prod2.isNew ? 1 : -1)
-          break
-    
-        case SORTING.DISCOUNT:
-          sorted = filtered.sort((prod1, prod2) => prod1.isSale < prod2.isSale ? 1 : -1)
-          break
-    
-        default:
-          sorted = filtered
-      }
-             
+    switch (sortMethod) {
+      case SORTING.RELEVANCE:
+        sorted = filtered.sort((prod1, prod2) => prod1.id > prod2.id ? 1 : -1)
+        break
+
+      case SORTING.CHEAP:
+        sorted = filtered.sort((prod1, prod2) => prod1.price > prod2.price ? 1 : -1)
+        break
+
+      case SORTING.EXPENSIVE:
+        sorted = filtered.sort((prod1, prod2) => prod1.price < prod2.price ? 1 : -1)
+        break
+
+      case SORTING.NEW:
+        sorted = filtered.sort((prod1, prod2) => prod1.isNew < prod2.isNew ? 1 : -1)
+        break
+
+      case SORTING.DISCOUNT:
+        sorted = filtered.sort((prod1, prod2) => prod1.isSale < prod2.isSale ? 1 : -1)
+        break
+
+      default:
+        sorted = filtered
+    }
+
     slisedCards = sorted.slice(firstIndex, lastIndex)
 
     return sorted
-  }
-
-  const check = () => {
-    let arr = data.products[2].categories
-    // for (let i = 0; i < arr.length; i++) {
-    //   // console.log(arr[i])
-      
-    //   if (arr[i] === 'Women') console.log('success', arr[i])
-    // }
-    // console.log(arr.length)
-    // console.log('arr = ', arr)
-
-
-    arr.forEach(elem => elem === 'Men' ? console.log('success', elem) : console.log('fail', elem) )
-
-    const answer = data.products.filter((prod) => prod.categories.forEach(cat => cat === 'Men' ? true : false ))
-
-    if (answer) {
-      console.log('MEN exsists')
-    }
-  }
-
-  const log = (sorted) => {
-    sorted.forEach(sort => console.log('sorted:', sort))
   }
 
   useEffect(() => {
     setProducts(filterCards(sortMethod))
   }, [filterAll, filterMen, filterWomen, filterAcc, filterNew, sortMethod])
 
-
   const changeCurPage = (page) => {
     setCurPage(page)
   }
 
-  // const changeSortMethod = (e) => {
-  //   setSortMethod(e.target.value)
-  //   setProducts(filterCards())
-  // }
-
-  return(
-      <section className='wrapper blocks'>
-        <section className='products'>
-          <div className='header'>
-            <div className='amount'>
-              <p>There are <span>{products.length}</span> products in this category</p>
-              <p>SORT METHOD: {sortMethod}</p>
-            </div>
-
-            <div className='sort'>
-              <select value={sortMethod} className='select' onChange={e => setSortMethod(e.target.value)}>
-                <option value={SORTING.RELEVANCE}>By relevance</option>
-                <option value={SORTING.CHEAP}>From cheap to expensive</option>
-                <option value={SORTING.EXPENSIVE}>From expensive to cheap</option>
-                <option value={SORTING.NEW}>New products</option>
-                <option value={SORTING.DISCOUNT}>Discount goods</option>
-              </select>
-            </div>
-
-          <label>
-            <input type='checkbox' name='sortAll' value={CATEGORIES.ALL} checked={filterAll}
-              onChange={() => {
-                setFilterAll(!filterAll)
-                setFilterMen(false)
-                setFilterWomen(false)
-                setFilterAcc(false)
-                setFilterNew(false)
-              }}
-            />
-            {CATEGORIES.ALL}
-          </label>
-          <label>
-            <input type='checkbox' name='sortMen' value={CATEGORIES.MEN} checked={filterMen}
-              onChange={() => {
-                setFilterMen(!filterMen)
-                setFilterAll(false)
-                setFilterWomen(false)
-                setFilterAcc(false)
-                setFilterNew(false)
-              }}
-            />
-            {CATEGORIES.MEN}
-          </label>
-          <label>
-            <input type='checkbox' name='sortWomen' value={CATEGORIES.WOMEN} checked={filterWomen}
-              onChange={() => {
-                setFilterWomen(!filterWomen)
-                setFilterAll(false)
-                setFilterMen(false)
-                setFilterAcc(false)
-                setFilterNew(false)
-              }}
-            />
-            {CATEGORIES.WOMEN}
-          </label>
-          <label>
-            <input type='checkbox' name='sortAcc' value={CATEGORIES.ACC} checked={filterAcc}
-              onChange={() => {
-                setFilterAcc(!filterAcc)
-                setFilterAll(false)
-                setFilterMen(false)
-                setFilterWomen(false)
-                setFilterNew(false)
-              }}
-            />
-            {CATEGORIES.ACC}
-          </label>
-          <label>
-            <input type='checkbox' name='sortNew' value={CATEGORIES.NEW} checked={filterNew}
-              onChange={() => {
-                setFilterNew(!filterNew)
-                setFilterAll(false)
-                setFilterMen(false)
-                setFilterAcc(false)
-                setFilterWomen(false)
-              }}
-            />
-            {CATEGORIES.NEW}
-          </label>
+  return (
+    <section className='wrapper blocks'>
+      <section className='sidebar'>
+        <div className="sidebar-block search">
+          <input type="text" className='search' placeholder='Search' />
         </div>
 
-          <div className='cards'>
-            {
-              products.length && slisedCards.map((product) => <Card key={product.id} product={product} /> )
-            }
+        <div className="sidebar-block categories">
+          <h3>Categories</h3>
+          <div className="content">
+            <label>
+              <input type='checkbox' name='sortAll' value={CATEGORIES.ALL} checked={filterAll}
+                onChange={() => {
+                  setFilterAll(!filterAll)
+                  setFilterMen(false)
+                  setFilterWomen(false)
+                  setFilterAcc(false)
+                  setFilterNew(false)
+                }}
+              />
+              {CATEGORIES.ALL}
+            </label>
+            <label>
+              <input type='checkbox' name='sortMen' value={CATEGORIES.MEN} checked={filterMen}
+                onChange={() => {
+                  setFilterMen(!filterMen)
+                  setFilterAll(false)
+                  setFilterWomen(false)
+                  setFilterAcc(false)
+                  setFilterNew(false)
+                }}
+              />
+              {CATEGORIES.MEN}
+            </label>
+            <label>
+              <input type='checkbox' name='sortWomen' value={CATEGORIES.WOMEN} checked={filterWomen}
+                onChange={() => {
+                  setFilterWomen(!filterWomen)
+                  setFilterAll(false)
+                  setFilterMen(false)
+                  setFilterAcc(false)
+                  setFilterNew(false)
+                }}
+              />
+              {CATEGORIES.WOMEN}
+            </label>
+            <label>
+              <input type='checkbox' name='sortAcc' value={CATEGORIES.ACC} checked={filterAcc}
+                onChange={() => {
+                  setFilterAcc(!filterAcc)
+                  setFilterAll(false)
+                  setFilterMen(false)
+                  setFilterWomen(false)
+                  setFilterNew(false)
+                }}
+              />
+              {CATEGORIES.ACC}
+            </label>
+            <label>
+              <input type='checkbox' name='sortNew' value={CATEGORIES.NEW} checked={filterNew}
+                onChange={() => {
+                  setFilterNew(!filterNew)
+                  setFilterAll(false)
+                  setFilterMen(false)
+                  setFilterAcc(false)
+                  setFilterWomen(false)
+                }}
+              />
+              {CATEGORIES.NEW}
+            </label>
+          </div>       
+        </div>
+
+        <div className="sidebar-block price">
+          <h3>Price</h3>
+          <div className="content">
+
+          </div>
+        </div>
+
+        {/* !!! Скорректировать цвета на акутальные */}
+        <div className="sidebar-block colors">
+        <h3>Colors</h3>
+
+          <div className="content">
+          <label>
+                <input type='checkbox' name='Color-black' value='black' checked={colorBlack}
+                  onChange={() => {
+                    setColorBlack(!colorBlack)
+                    setColorGreen(false)
+                    setColorBlue(false)
+                    setColorRed(false)
+                    setColorYellow(false)
+                  }}
+                />
+                Black
+              </label>
+
+          </div>
+        </div>
+
+        <div className="sidebar-block reviewed">
+
+        </div>
+
+        <div className="sidebar-block sale-banner">
+
+        </div>
+
+
+      </section>
+
+      <section className='products'>
+        <div className='header'>
+          <div className='amount'>
+            <p>There are <span>{products.length}</span> products in this category</p>
+            <p>SORT METHOD: {sortMethod}</p>
           </div>
 
-          <Pagination totalPages={totalPages} changeCurPage={changeCurPage} curPage={curPage} />
-        </section>
-      </section>   
+          <div className='sort'>
+            <select value={sortMethod} className='select' onChange={e => setSortMethod(e.target.value)}>
+              <option value={SORTING.RELEVANCE}>By relevance</option>
+              <option value={SORTING.CHEAP}>From cheap to expensive</option>
+              <option value={SORTING.EXPENSIVE}>From expensive to cheap</option>
+              <option value={SORTING.NEW}>New products</option>
+              <option value={SORTING.DISCOUNT}>Discount goods</option>
+            </select>
+          </div>
+
+
+        </div>
+
+        <div className='cards'>
+          {
+            products.length && slisedCards.map((product) => <Card key={product.id} product={product} />)
+          }
+        </div>
+
+        <Pagination totalPages={totalPages} changeCurPage={changeCurPage} curPage={curPage} />
+      </section>
+    </section>
   )
 
 }
