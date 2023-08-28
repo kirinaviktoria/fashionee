@@ -17,12 +17,23 @@
       flex-direction: column;
       gap: 30px;
 
+      h3 {
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        font-size: 24px;
+      }
+
+      h3::after {
+        content: ' ';
+        padding-top: 10px;
+        border-bottom: 2px solid #000;
+        display: block;
+        width: 100%;
+      }
+
       .content {
         gap: 7px;
 
       }
-
-      
     }
 
     .search {
