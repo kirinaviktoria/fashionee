@@ -195,7 +195,73 @@ export default function Products() {
         <div className="sidebar-block categories">
           <h3>Categories</h3>
           <div className="content">
-            <label>
+            <p className={`filterCat ${filterAll && 'active'}`}
+              value={CATEGORIES.ALL}
+              onClick={() => {
+                setFilterAll(!filterAll)
+                setFilterMen(false)
+                setFilterWomen(false)
+                setFilterAcc(false)
+                setFilterNew(false)
+              }}
+            >
+            {CATEGORIES.ALL}
+            </p>
+
+            <p className={`filterCat ${filterMen && 'active'}`} 
+              value={CATEGORIES.MEN}
+              onClick={() => {
+                setFilterMen(!filterMen)
+                setFilterAll(false)
+                setFilterWomen(false)
+                setFilterAcc(false)
+                setFilterNew(false)
+              }}
+            >
+            {CATEGORIES.MEN}
+            </p>
+
+            <p className={`filterCat ${filterWomen && 'active'}`}  
+              value={CATEGORIES.WOMEN}
+              onClick={() => {
+                setFilterWomen(!filterWomen)
+                setFilterMen(false)
+                setFilterAll(false)
+                setFilterAcc(false)
+                setFilterNew(false)
+              }}
+            >
+            {CATEGORIES.WOMEN}
+            </p>
+
+            <p className={`filterCat ${filterAcc && 'active'}`}  
+              value={CATEGORIES.ACC}
+              onClick={() => {
+                setFilterAcc(!filterAcc)
+                setFilterMen(false)
+                setFilterWomen(false)
+                setFilterAll(false)
+                setFilterNew(false)
+              }}
+            >
+            {CATEGORIES.ACC}
+            </p>
+
+            <p className={`filterCat ${filterNew && 'active'}`}  
+              value={CATEGORIES.NEW}
+              onClick={() => {
+                setFilterNew(!filterNew)
+                setFilterMen(false)
+                setFilterWomen(false)
+                setFilterAcc(false)
+                setFilterAll(false)
+              }}
+            >
+            {CATEGORIES.NEW}
+            </p>
+
+
+            {/* <label>
               <input type='checkbox' name='sortAll' value={CATEGORIES.ALL} checked={filterAll}
                 onChange={() => {
                   setFilterAll(!filterAll)
@@ -206,8 +272,8 @@ export default function Products() {
                 }}
               />
               {CATEGORIES.ALL}
-            </label>
-            <label>
+            </label> */}
+            {/* <label>
               <input type='checkbox' name='sortMen' value={CATEGORIES.MEN} checked={filterMen}
                 onChange={() => {
                   setFilterMen(!filterMen)
@@ -254,7 +320,7 @@ export default function Products() {
                 }}
               />
               {CATEGORIES.NEW}
-            </label>
+            </label> */}
           </div>       
         </div>
 
@@ -281,8 +347,59 @@ export default function Products() {
                   }}
                 />
                 Black
-              </label>
+            </label>
 
+            <label>
+                <input type='checkbox' name='Color-black' value='black' checked={colorBlue}
+                  onChange={() => {
+                    setColorBlue(!colorBlue)
+                    setColorGreen(false)
+                    setColorBlack(false)
+                    setColorRed(false)
+                    setColorYellow(false)
+                  }}
+                />
+                Blue
+            </label>
+
+            <label>
+                <input type='checkbox' name='Color-black' value='black' checked={colorRed}
+                  onChange={() => {
+                    setColorRed(!colorRed)
+                    setColorGreen(false)
+                    setColorBlue(false)
+                    setColorBlack(false)
+                    setColorYellow(false)
+                  }}
+                />
+                Red
+            </label>
+
+            <label>
+                <input type='checkbox' name='Color-black' value='black' checked={colorYellow}
+                  onChange={() => {
+                    setColorYellow(!colorYellow)
+                    setColorGreen(false)
+                    setColorBlue(false)
+                    setColorRed(false)
+                    setColorBlack(false)
+                  }}
+                />
+                Yellow
+            </label>
+
+            <label>
+                <input type='checkbox' name='Color-black' value='black' checked={colorGreen}
+                  onChange={() => {
+                    setColorGreen(!colorGreen)
+                    setColorBlack(false)
+                    setColorBlue(false)
+                    setColorRed(false)
+                    setColorYellow(false)
+                  }}
+                />
+                Green
+            </label>
           </div>
         </div>
 
