@@ -102,7 +102,7 @@ $light-grey: #BCBCBC;
         max-height: 50px;
         width: 100%;
         height: 100%;
-        padding: 10px 30px;
+        padding: 15px 30px;
         background-color: #000;
         color: #fff;
         font-size: 16px;
@@ -207,7 +207,7 @@ $light-grey: #BCBCBC;
     gap: 30px;
     max-width: 846px;
     width: 100%;
-    justify-content: flex-end;
+    // justify-content: flex-start;
     // padding-top: 174px;
 
     .header {
