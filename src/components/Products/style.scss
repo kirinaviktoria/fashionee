@@ -1,5 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800;900&display=swap');
+
 $red: #FF8E8E;
 $dark-grey: #444444;
+$light-grey: #BCBCBC;
 
 .blocks {
   display: flex;
@@ -9,6 +12,7 @@ $dark-grey: #444444;
   // margin: 0 auto;
 
   .sidebar {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     max-width: 244px;
     display: flex;
     flex-direction: column;
@@ -20,7 +24,6 @@ $dark-grey: #444444;
       flex-direction: column;
       gap: 30px;
       
-
       h3 {
         font-size: 24px;
       }
@@ -36,6 +39,7 @@ $dark-grey: #444444;
       .content {
         gap: 7px;
         color: $dark-grey;
+        padding: 0 20px;
 
         .filterCat {
           cursor: pointer;
@@ -61,7 +65,119 @@ $dark-grey: #444444;
           font-weight: 900;
         }
 
+        .color-block {
+          display: flex;
+          align-items: center;
+          gap: 14px;
+          cursor: pointer;
+          position: relative;
 
+          .square {
+            border: 1px solid $light-grey;
+            // padding: 5px;
+            max-width: 15px;
+            max-height: 15px;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+        }
+
+        .checked {
+          color: $red;
+        }
+      }
+
+      .button {
+        font-family: inherit;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        max-width: 236px;
+        max-height: 50px;
+        width: 100%;
+        height: 100%;
+        padding: 10px 30px;
+        background-color: #000;
+        color: #fff;
+        font-size: 16px;
+        font-weight: 600;
+      }
+
+      .button::after {
+        content: '';
+        border-right: 2px solid #000;
+        margin-left: 2px;
+      }
+
+      .btn-after {
+        border-right: 2px solid #000;
+      }
+
+     
+    }
+    // END sidebar-block
+
+    .btn-block {
+      display: flex;
+      flex-direction: row;
+      gap: 2px;
+      min-width: 236px;
+      max-height: 50px;
+      width: 100%;
+      height: 100%;
+
+    }
+
+    .sale-banner {
+      background-color: #000;
+      padding: 10px;
+      font-family: 'Raleway', sans-serif;
+      max-width: 242px;
+      width: 100%;
+
+      .sale-inner {
+        border: 2px solid #fff;
+        color: #fff;
+        padding: 73px 14px 73px 39px;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+
+        .header {
+          font-size: 60px;
+          font-weight: 800;
+
+          .header-first {
+            font-size: 24px;
+            font-weight: 600;
+            letter-spacing: 10px;
+          }
+        }
+
+        .sale-content {
+          font-size: 14px;
+          font-weight: 500;
+          line-height: 150%;
+        }
+
+        .target {
+          font-size: 16px;
+          font-weight: 600;
+          display: flex;
+          gap: 14px;
+        }
+
+        .target::before {
+          content: '';
+          display: block;
+          width: 25px;
+          height: 2px;
+          background-color: #fff;
+          align-self: center;
+        }
       }
     }
 

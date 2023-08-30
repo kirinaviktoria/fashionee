@@ -3,6 +3,8 @@ import data from '../../products.json'
 import './style.scss'
 import Card from './Сard/Card';
 import Pagination from '../Pagination/Pagination';
+import { ReactComponent as IconChecked } from '../../img/icon-check.svg';
+
 // import {ProductsContext} from '../../context/ProductsContext'
 // import { ACTIONS, reduser, initialState } from '../../redusers/reducer';
 
@@ -259,68 +261,6 @@ export default function Products() {
             >
             {CATEGORIES.NEW}
             </p>
-
-
-            {/* <label>
-              <input type='checkbox' name='sortAll' value={CATEGORIES.ALL} checked={filterAll}
-                onChange={() => {
-                  setFilterAll(!filterAll)
-                  setFilterMen(false)
-                  setFilterWomen(false)
-                  setFilterAcc(false)
-                  setFilterNew(false)
-                }}
-              />
-              {CATEGORIES.ALL}
-            </label> */}
-            {/* <label>
-              <input type='checkbox' name='sortMen' value={CATEGORIES.MEN} checked={filterMen}
-                onChange={() => {
-                  setFilterMen(!filterMen)
-                  setFilterAll(false)
-                  setFilterWomen(false)
-                  setFilterAcc(false)
-                  setFilterNew(false)
-                }}
-              />
-              {CATEGORIES.MEN}
-            </label>
-            <label>
-              <input type='checkbox' name='sortWomen' value={CATEGORIES.WOMEN} checked={filterWomen}
-                onChange={() => {
-                  setFilterWomen(!filterWomen)
-                  setFilterAll(false)
-                  setFilterMen(false)
-                  setFilterAcc(false)
-                  setFilterNew(false)
-                }}
-              />
-              {CATEGORIES.WOMEN}
-            </label>
-            <label>
-              <input type='checkbox' name='sortAcc' value={CATEGORIES.ACC} checked={filterAcc}
-                onChange={() => {
-                  setFilterAcc(!filterAcc)
-                  setFilterAll(false)
-                  setFilterMen(false)
-                  setFilterWomen(false)
-                  setFilterNew(false)
-                }}
-              />
-              {CATEGORIES.ACC}
-            </label>
-            <label>
-              <input type='checkbox' name='sortNew' value={CATEGORIES.NEW} checked={filterNew}
-                onChange={() => {
-                  setFilterNew(!filterNew)
-                  setFilterAll(false)
-                  setFilterMen(false)
-                  setFilterAcc(false)
-                  setFilterWomen(false)
-                }}
-              />
-              {CATEGORIES.NEW}
-            </label> */}
           </div>       
         </div>
 
@@ -333,84 +273,96 @@ export default function Products() {
 
         {/* !!! Скорректировать цвета на акутальные */}
         <div className="sidebar-block colors">
-        <h3>Colors</h3>
+          <h3>Colors</h3>
 
           <div className="content">
-          <label>
-                <input type='checkbox' name='Color-black' value='black' checked={colorBlack}
-                  onChange={() => {
-                    setColorBlack(!colorBlack)
-                    setColorGreen(false)
-                    setColorBlue(false)
-                    setColorRed(false)
-                    setColorYellow(false)
-                  }}
-                />
-                Black
-            </label>
+            
+            <div className={`color-block black ${colorBlack && 'checked'}`} 
+              value={colorBlack}
+              onClick={() => {
+                setColorBlack(!colorBlack)
+              }}
+            >
+              <div className='square'>
+              {colorBlack && <IconChecked />}
+              </div>
+              <p>Black</p>
+            </div>
 
-            <label>
-                <input type='checkbox' name='Color-black' value='black' checked={colorBlue}
-                  onChange={() => {
-                    setColorBlue(!colorBlue)
-                    setColorGreen(false)
-                    setColorBlack(false)
-                    setColorRed(false)
-                    setColorYellow(false)
-                  }}
-                />
-                Blue
-            </label>
+            <div className={`color-block blue ${colorBlue && 'checked'}`} 
+              value={colorBlue}
+              onClick={() => {
+                setColorBlue(!colorBlue)
+              }}
+            >
+              <div className='square'>
+              {colorBlue && <IconChecked />}
+              </div>
+              <p>Blue</p>
+            </div>
 
-            <label>
-                <input type='checkbox' name='Color-black' value='black' checked={colorRed}
-                  onChange={() => {
-                    setColorRed(!colorRed)
-                    setColorGreen(false)
-                    setColorBlue(false)
-                    setColorBlack(false)
-                    setColorYellow(false)
-                  }}
-                />
-                Red
-            </label>
+            <div className={`color-block red ${colorRed && 'checked'}`} 
+              value={colorRed}
+              onClick={() => {
+                setColorRed(!colorRed)
+              }}
+            >
+              <div className='square'>
+              {colorRed && <IconChecked />}
+              </div>
+              <p>Red</p>
+            </div>
 
-            <label>
-                <input type='checkbox' name='Color-black' value='black' checked={colorYellow}
-                  onChange={() => {
-                    setColorYellow(!colorYellow)
-                    setColorGreen(false)
-                    setColorBlue(false)
-                    setColorRed(false)
-                    setColorBlack(false)
-                  }}
-                />
-                Yellow
-            </label>
+            <div className={`color-block yellow ${colorYellow && 'checked'}`} 
+              value={colorYellow}
+              onClick={() => {
+                setColorYellow(!colorYellow)
+              }}
+            >
+              <div className='square'>
+              {colorYellow && <IconChecked />}
+              </div>
+              <p>Yellow</p>
+            </div>
 
-            <label>
-                <input type='checkbox' name='Color-black' value='black' checked={colorGreen}
-                  onChange={() => {
-                    setColorGreen(!colorGreen)
-                    setColorBlack(false)
-                    setColorBlue(false)
-                    setColorRed(false)
-                    setColorYellow(false)
-                  }}
-                />
-                Green
-            </label>
+            <div className={`color-block green ${colorGreen && 'checked'}`} 
+              value={colorGreen}
+              onClick={() => {
+                setColorGreen(!colorGreen)
+              }}
+            >
+              <div className='square'>
+              {colorGreen && <IconChecked />}
+              </div>
+              <p>Green</p>
+            </div>
           </div>
         </div>
 
+        <div className='sidebar-block btn-block'>
+          <button className='button'>
+            Apply Filter
+          </button>
+          <div className='btn-after'/>
+        </div>
+
         <div className="sidebar-block reviewed">
+          <h3>Reviewed By You</h3>
 
         </div>
 
         <div className="sidebar-block sale-banner">
+          <div className='sale-inner'>
+            <div className='header'><p className='header-first'>SEASON</p>SALE</div>
 
+            <p className='sale-content'>Non aliqua reprehenderit
+              reprehenderit culpa
+              laboris nulla</p>
+
+            <p className='target'>Shop Now</p>
+
+          </div>
         </div>
-
 
       </section>
 
