@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800;900&display=swap');
+
+$red: #FF8E8E;
+$dark-grey: #444444;
+$light-grey: #BCBCBC;
+
 * {
   margin: 0;
   padding: 0;
@@ -33,11 +39,11 @@ body {
 .maintext {
   font-weight: 500px;
   font-size: 14px;
-  color: #444444;
+  color: $dark-grey;
 }
 
 .redtext {
-  color: #FF8E8E;
+  color: $red;
 }
 
 .blacktext {

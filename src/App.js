@@ -4,6 +4,7 @@ import ShopPage from "./components/ShopPage/ShopPage";
 import Products from "./components/Products/Products";
 import {ProductsContext} from './context/ProductsContext'
 import { ACTIONS, reduser, initialState } from "./redusers/reducer";
+import Footer from "./components/Footer/Footer"; 
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
           <ShopPage />
           <Products />
         </div>
+        <Footer/>
       </div>
     </ProductsContext.Provider>
 

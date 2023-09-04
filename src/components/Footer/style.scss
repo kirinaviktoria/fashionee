@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;200;300;400;500;600;700&family=Raleway:wght@400;500;600;700;800;900&display=swap');
+
+
+$red: #FF8E8E;
+$dark-grey: #444444;
+$light-grey: #BCBCBC;
+
+p,
+li {
+  font-size: 14px;
+}
+
+li {
+  display: flex;
+  gap: 12px;
+  padding-bottom: 12px;
+  list-style-type: none;
+}
+
+li:last-child {
+  padding: 0;
+}
+
+li::before {
+  content: '';
+  display: block;
+  width: 3px;
+  height: 3px;
+  background-color: $dark-grey;
+  align-self: center;
+}
+
+.font12 {
+  font-size: 12px;
+}
+
+h4 {
+  font-size: 20px;
+}
+
+.fontJ {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 400;
+}
+
+.wrapper {
+  padding: 30px;
+  font-family: 'Raleway', sans-serif;
+
+  .inner-wrapper {
+    display: flex;
+    flex-direction: column;
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+
+      .image-left {
+        max-width: 130px;
+
+      }
+
+      .footer-inner {
+        max-width: 1140px;
+        width: 100%;
+
+        .footer-columns {
+          display: flex;
+          justify-content: space-between;
+          padding-bottom: 88px;
+
+          // gap: 20px;
+
+          .footer-content {
+            display: flex;
+            flex-direction: column;
+            // justify-content: space-between;
+            padding-top: 70px;
+            gap: 20px;
+            max-width: 360px;
+
+            .first-line {
+              display: flex;
+              flex-direction: column;
+              justify-content: flex-start;
+              gap: 25px;
+              padding-bottom: 25px;
+              max-width: 330px;
+            }
+
+            .first-line::after {
+              content: '';
+              width: 100%;
+              border-bottom: 1px solid $light-grey;
+            }
+
+            .second-line {
+              display: flex;
+              flex-direction: column;
+              gap: 20px;
+              justify-content: flex-start;
+
+              .find-list {
+                font-weight: 600;
+              }
+
+              .find-list,
+              .find-list p {
+                display: flex;
+                gap: 15px;
+
+              }
+
+              .find-list p::after {
+                content: ' ';
+                display: block;
+                width: 10px;
+                height: 1px;
+                background-color: #000;
+                align-self: center;
+              }
+
+              .find-list p:last-child::after {
+                display: none;
+              }
+
+
+            }
+          }
+        }
+
+        .footer-columns:last-child {
+          flex: 100%;
+        }
+
+        .image-right {
+          max-width: 290px;
+          padding-top: 55px;
+          display: flex;
+          justify-content: flex-end;
+        }
+
+        .rights {
+          padding-top: 23px;
+          border-top: 1px solid $light-grey;
+          display: flex;
+          justify-content: space-between;
+
+          .payment {
+            display: flex;
+            gap: 13px;
+          }
+        }
+      }
+    }
+
+
+
+
+  }
+
+
+}
