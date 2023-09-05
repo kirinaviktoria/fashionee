@@ -13,7 +13,11 @@ export default function Footer() {
 
 
   return (
+    <>
+    <div className="separator" />
+    
     <div className="wrapper">
+      
       <div className="inner-wrapper">
         <div className='footer'>
           <div className="image-left"> <FooteLeft className='footer-left'/> </div>
@@ -99,6 +103,7 @@ export default function Footer() {
       </div>
 
     </div>
+    </>
 
   )
 }

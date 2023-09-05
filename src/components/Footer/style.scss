@@ -4,14 +4,19 @@
 $red: #FF8E8E;
 $dark-grey: #444444;
 $light-grey: #BCBCBC;
+$light: #EEEEEE;
 
-
+.separator {
+  display: flex;
+  width: 100%;
+  max-height: 20px;
+  height: 100%;
+  border-bottom: 20px solid $light;
+}
 
 .wrapper {
   padding: 30px;
   font-family: 'Raleway', sans-serif;
-
-  
 
   .inner-wrapper {
     display: flex;
