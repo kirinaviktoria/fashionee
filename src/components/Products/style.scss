@@ -186,9 +186,24 @@ $light-grey: #BCBCBC;
       }
     }
 
-    .search {
-
-    }
+      .search {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        border-bottom: 1px solid $light-grey;
+  
+        input {
+          font-family: 'Raleway', sans-serif;
+          outline: none;
+          padding-bottom: 16px;
+          max-width: 360px;
+          width: 100%;
+          border: none;
+          font-size: 14px;
+        }
+  
+      }
 
     .categories {
 

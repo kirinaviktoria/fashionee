@@ -4,6 +4,7 @@ import './style.scss'
 import Card from './Сard/Card';
 import Pagination from '../Pagination/Pagination';
 import { ReactComponent as IconChecked } from '../../img/icon-check.svg';
+import { ReactComponent as Search } from '../../img/search.svg';
 
 // import {ProductsContext} from '../../context/ProductsContext'
 // import { ACTIONS, reduser, initialState } from '../../redusers/reducer';
@@ -191,7 +192,11 @@ export default function Products() {
     <section className='wrapper blocks'>
       <section className='sidebar'>
         <div className="sidebar-block search">
+          {/* <div className='textbox'>  */}
           <input type="text" className='search' placeholder='Search' />
+          <span className='icon-send'> <Search /> </span>
+          {/* </div> */}
+          {/* <input type="text" className='search' placeholder='Search' /> */}
         </div>
 
         <div className="sidebar-block categories">

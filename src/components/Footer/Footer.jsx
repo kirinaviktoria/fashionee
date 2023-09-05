@@ -16,7 +16,7 @@ export default function Footer() {
     <div className="wrapper">
       <div className="inner-wrapper">
         <div className='footer'>
-          <div className="image-left"> <FooteLeft /> </div>
+          <div className="image-left"> <FooteLeft className='footer-left'/> </div>
 
 
           <div className="footer-inner">
@@ -67,8 +67,10 @@ export default function Footer() {
 
                 <p>Subscribe to be the first to hear about deals,  offers and upcoming collections.</p>
 
-                <input placeholder='Enter your email' />
-                <Send />
+                <div className='textbox'> 
+                  <input placeholder='Enter your email' />
+                  <span className='icon-send'> <Send /> </span>
+                </div>
 
               </div>
             </div>
@@ -90,7 +92,7 @@ export default function Footer() {
           </div>
 
 
-          <div className="image-right"> <FooteRight /> </div>
+          <div className="image-right"> <FooteRight className='footer-right'/> </div>
         </div>
 
 
