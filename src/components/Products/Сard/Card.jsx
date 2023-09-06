@@ -4,22 +4,57 @@ import { ReactComponent as Sale } from '../../../img/sale.svg'
 import { ReactComponent as New } from '../../../img/new.svg'
 import { ReactComponent as Like } from '../../../img/like.svg'
 
-export default function Card({ product }) {
+export default function Card({ product, likedCards }) {
   const [like, setLike] = useState(false)
   const [add, setAdd] = useState(false)
+  const likedProducts = []
  
-  const handleClick = () => {
+
+  //!!состояние не меняется сразу после клика
+  const handleLikeClick = () => {
     setLike(!like);
-    // localStorage.setItem('favourite', JSON.stringify(product))
+    handleLikedCards(!like)
+
+    // likedCards.push(product)
+    // localStorage.setItem('favourite', JSON.stringify(likedCards))
+
+    // if (like) likedProducts.push(product)
+    // console.log(like)
+    // console.log(likedCards)
+    
   }
+
+  //!!как удалить ненужный элемент из массива и как удалить его из localStorage
+  const handleLikedCards = (like) => {
+    if (like) likedCards.push(product)
+    // else likedCards.splice(product.id, 1)
+
+    if(!localStorage.getItem('favourite')) localStorage.setItem('favourite', JSON.stringify(likedCards))
+    localStorage.setItem('favourite', JSON.stringify(likedCards))
+
+    console.log(likedCards)
+    console.log(like);
+  }
+
+  // useEffect(() => {
+  //   if (like) likedCards.push(product)
+  //   else likedCards.splice(product.id, 1)
+  //   console.log(likedCards)
+  //   console.log(like);
+
+    // if (like) likedCards.push(product)
+    // localStorage.setItem('favourite', JSON.stringify(likedCards))
+    
+    // console.log(likedCards)
+  // }, [like])
 
   const addToCart = () => {
     setAdd(!add);
   }
 
-  useEffect (() =>{
-    localStorage.setItem('favourite', JSON.stringify(product))
-  }, [like])
+  // useEffect (() =>{
+  //   localStorage.setItem('favourite', JSON.stringify(product))
+  // }, [like])
 
   return (
     <section className='card'>
@@ -34,7 +69,7 @@ export default function Card({ product }) {
           </div>
         }
 
-        <button onClick={() => handleClick()} className='like'>
+        <button onClick={() => handleLikeClick()} className='like'>
           {<Like className={`${like ? 'active': ''}`} />}
         </button>
       </div>

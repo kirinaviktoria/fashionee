@@ -40,33 +40,26 @@ const CATEGORIES = {
 export default function Products() {
   const [products, setProducts] = useState(data.products)
   const [sortMethod, setSortMethod] = useState(SORTING.RELEVANCE)
-  const [filterMethod, setFilterMethod] = useState(null)
   const [filterAll, setFilterAll] = useState(true)
   const [filterMen, setFilterMen] = useState(false)
   const [filterWomen, setFilterWomen] = useState(false)
   const [filterAcc, setFilterAcc] = useState(false)
   const [filterNew, setFilterNew] = useState(false)
-
   const [colorBlack, setColorBlack] = useState(false)
   const [colorBlue, setColorBlue] = useState(false)
   const [colorRed, setColorRed] = useState(false)
   const [colorYellow, setColorYellow] = useState(false)
   const [colorGreen, setColorGreen] = useState(false)
-
-  const [checked, setChecked] = useState(0)
-
   const [curPage, setCurPage] = useState(1)
   // const [likedCards, setLikedCards] = useState([])
-  //
-  // const [state, dispatch] = useReducer(reduser, initialState)
-  //
-  // const [process, setProcess] = useState('')
-  //!!запомнить в массив избранные товары
+  const likedCards = []
 
   const firstIndex = (curPage - 1) * PRODUCTS_PER_PAGE
   const lastIndex = firstIndex + PRODUCTS_PER_PAGE
   const totalPages = products.length / PRODUCTS_PER_PAGE;
   let slisedCards = products.slice(firstIndex, lastIndex)
+
+    //!!запомнить в массив избранные товары
 
   //рабочая сортировка по всем карточкам
   const sorting = (sortMethod) => {
@@ -110,7 +103,7 @@ export default function Products() {
 
       case CATEGORIES.MEN:
         filtered = products.filter(prod => prod.categories.includes('Men'))
-        console.log(filtered)
+        // console.log(filtered)
         break
 
       case CATEGORIES.WOMEN:
@@ -148,7 +141,7 @@ export default function Products() {
     }
 
     // else filtered = data.products
-    console.log(sortMethod);
+    // console.log(sortMethod);
 
     switch (sortMethod) {
       case SORTING.RELEVANCE:
@@ -192,11 +185,8 @@ export default function Products() {
     <section className='wrapper blocks'>
       <section className='sidebar'>
         <div className="sidebar-block search">
-          {/* <div className='textbox'>  */}
           <input type="text" className='search' placeholder='Search' />
           <span className='icon-send'> <Search /> </span>
-          {/* </div> */}
-          {/* <input type="text" className='search' placeholder='Search' /> */}
         </div>
 
         <div className="sidebar-block categories">
@@ -393,7 +383,7 @@ export default function Products() {
 
         <div className='cards'>
           {
-            products.length && slisedCards.map((product) => <Card key={product.id} product={product} />)
+            products.length && slisedCards.map((product) => <Card key={product.id} product={product} likedCards={likedCards} />)
           }
         </div>
 
