@@ -126,6 +126,7 @@ export default function Products() {
     return filtered
   }
 
+  
   //!! Добавить функцию обработки фильтра и сортировки
   const filterCards = (sortMethod) => {
     let filtered = data.products

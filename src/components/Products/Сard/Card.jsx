@@ -3,37 +3,32 @@ import './style.scss'
 import { ReactComponent as Sale } from '../../../img/sale.svg'
 import { ReactComponent as New } from '../../../img/new.svg'
 import { ReactComponent as Like } from '../../../img/like.svg'
+import { useContext } from 'react'
+import { ProductsContext } from '../../../context/ProductsContext'
 
-export default function Card({ product, likedCards }) {
+export default function Card({ product }) {
   const [like, setLike] = useState(false)
   const [add, setAdd] = useState(false)
-  const likedProducts = []
+  // const likedCards = []
+
+  const { likedCards } = useContext(ProductsContext)
  
 
   //!!состояние не меняется сразу после клика
   const handleLikeClick = () => {
     setLike(!like);
-    handleLikedCards(!like)
-
-    // likedCards.push(product)
-    // localStorage.setItem('favourite', JSON.stringify(likedCards))
-
-    // if (like) likedProducts.push(product)
-    // console.log(like)
-    // console.log(likedCards)
-    
+    handleLikedCards(!like) 
   }
 
   //!!как удалить ненужный элемент из массива и как удалить его из localStorage
   const handleLikedCards = (like) => {
     if (like) likedCards.push(product)
-    // else likedCards.splice(product.id, 1)
 
     if(!localStorage.getItem('favourite')) localStorage.setItem('favourite', JSON.stringify(likedCards))
     localStorage.setItem('favourite', JSON.stringify(likedCards))
 
     console.log(likedCards)
-    console.log(like);
+    // console.log(like);
   }
 
   // useEffect(() => {
