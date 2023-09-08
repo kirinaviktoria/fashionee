@@ -7,27 +7,18 @@ import { ReactComponent as Like } from '../../../img/like.svg'
 export default function Card({ product, likedCards }) {
   const [like, setLike] = useState(false)
   const [add, setAdd] = useState(false)
-  const likedProducts = []
+  // const likedProducts = []
  
 
   //!!состояние не меняется сразу после клика
   const handleLikeClick = () => {
     setLike(!like);
     handleLikedCards(!like)
-
-    // likedCards.push(product)
-    // localStorage.setItem('favourite', JSON.stringify(likedCards))
-
-    // if (like) likedProducts.push(product)
-    // console.log(like)
-    // console.log(likedCards)
-    
   }
 
   //!!как удалить ненужный элемент из массива и как удалить его из localStorage
   const handleLikedCards = (like) => {
     if (like) likedCards.push(product)
-    // else likedCards.splice(product.id, 1)
 
     if(!localStorage.getItem('favourite')) localStorage.setItem('favourite', JSON.stringify(likedCards))
     localStorage.setItem('favourite', JSON.stringify(likedCards))
@@ -36,25 +27,9 @@ export default function Card({ product, likedCards }) {
     console.log(like);
   }
 
-  // useEffect(() => {
-  //   if (like) likedCards.push(product)
-  //   else likedCards.splice(product.id, 1)
-  //   console.log(likedCards)
-  //   console.log(like);
-
-    // if (like) likedCards.push(product)
-    // localStorage.setItem('favourite', JSON.stringify(likedCards))
-    
-    // console.log(likedCards)
-  // }, [like])
-
   const addToCart = () => {
     setAdd(!add);
   }
-
-  // useEffect (() =>{
-  //   localStorage.setItem('favourite', JSON.stringify(product))
-  // }, [like])
 
   return (
     <section className='card'>
