@@ -1,10 +1,12 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useReducer, useState } from 'react'
 import './style.scss'
 import { ReactComponent as Sale } from '../../../img/sale.svg'
 import { ReactComponent as New } from '../../../img/new.svg'
 import { ReactComponent as Like } from '../../../img/like.svg'
 import { useContext } from 'react'
 import { ProductsContext } from '../../../context/ProductsContext'
+import { reduser } from '../../../redusers/reducer'
+
 
 export default function Card({ product }) {
   const [like, setLike] = useState(false)
@@ -12,6 +14,7 @@ export default function Card({ product }) {
   // const likedCards = []
 
   const { likedCards } = useContext(ProductsContext)
+  const [state, dispatch] = useReducer(reduser, JSON.parse(localStorage.getItem('favourite')))
  
 
   //!!состояние не меняется сразу после клика
@@ -22,12 +25,12 @@ export default function Card({ product }) {
 
   //!!как удалить ненужный элемент из массива и как удалить его из localStorage
   const handleLikedCards = (like) => {
-    if (like) likedCards.push(product)
+    if (like) state.push(product)
 
-    if(!localStorage.getItem('favourite')) localStorage.setItem('favourite', JSON.stringify(likedCards))
-    localStorage.setItem('favourite', JSON.stringify(likedCards))
+    if(!localStorage.getItem('favourite')) localStorage.setItem('favourite', JSON.stringify(state))
+    localStorage.setItem('favourite', JSON.stringify(state))
 
-    console.log(likedCards)
+    console.log(state)
     // console.log(like);
   }
 
