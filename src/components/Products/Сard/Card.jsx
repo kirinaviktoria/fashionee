@@ -5,33 +5,39 @@ import { ReactComponent as New } from '../../../img/new.svg'
 import { ReactComponent as Like } from '../../../img/like.svg'
 import { useContext } from 'react'
 import { ProductsContext } from '../../../context/ProductsContext'
-import { reduser } from '../../../redusers/reducer'
+import { ACTIONS, initialState, reduser } from '../../../redusers/reducer'
 
 
 export default function Card({ product }) {
-  const [like, setLike] = useState(false)
+  const [state, dispatch] = useReducer(reduser, initialState)
+
+  const [like, setLike] = useState(state.like)
   const [add, setAdd] = useState(false)
   // const likedCards = []
 
   const { likedCards } = useContext(ProductsContext)
-  const [state, dispatch] = useReducer(reduser, JSON.parse(localStorage.getItem('favourite')))
- 
 
   //!!состояние не меняется сразу после клика
   const handleLikeClick = () => {
-    setLike(!like);
-    handleLikedCards(!like) 
+    // setLike(!like);
+    // handleLikedCards(!like) 
   }
 
   //!!как удалить ненужный элемент из массива и как удалить его из localStorage
   const handleLikedCards = (like) => {
-    if (like) state.push(product)
+    // if (like) state.push(product)
 
-    if(!localStorage.getItem('favourite')) localStorage.setItem('favourite', JSON.stringify(state))
-    localStorage.setItem('favourite', JSON.stringify(state))
+    // if(!localStorage.getItem('favourite')) localStorage.setItem('favourite', JSON.stringify(state))
+    // localStorage.setItem('favourite', JSON.stringify(state))
 
-    console.log(state)
-    // console.log(like);
+    // console.log(state)
+    // if(like) {
+    //   dispatch({
+    //   type: ACTIONS.LIKE_PRODUCTS,
+    //   payload: { liked: product }
+    // })
+    // } 
+    // else return state
   }
 
   // useEffect(() => {
@@ -46,13 +52,16 @@ export default function Card({ product }) {
     // console.log(likedCards)
   // }, [like])
 
+  useEffect(() => {
+    if (like) {
+      localStorage.setItem('favourite', JSON.stringify(state.amountLiked))
+    }
+    
+  }, [dispatch])
+
   const addToCart = () => {
     setAdd(!add);
   }
-
-  // useEffect (() =>{
-  //   localStorage.setItem('favourite', JSON.stringify(product))
-  // }, [like])
 
   return (
     <section className='card'>
@@ -67,7 +76,13 @@ export default function Card({ product }) {
           </div>
         }
 
-        <button onClick={() => handleLikeClick()} className='like'>
+        <button onClick={() => dispatch({
+            type: ACTIONS.LIKE_PRODUCTS,
+            payload: state.amountLiked.push(product),
+            liked: setLike(!like)
+          })} 
+        className='like'
+        >
           {<Like className={`${like ? 'active': ''}`} />}
         </button>
       </div>
