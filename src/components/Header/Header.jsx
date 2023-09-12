@@ -1,13 +1,11 @@
-import React from 'react'
+import React  from 'react'
 import './style.css'
 import './style.scss'
+// import { ProductsContext } from '../../context/ProductsContext';
 
-export default function Header() {
-  const liked = 0;
+export default function Header({likedAmount}) {
+  // const liked = 0;
   const selected = 0;
-
-  // const [liked, setLiked] = useState(0)
-  // const [selected, setSelected] = useState(0)
 
   return (
     <div className='wrapper'>
@@ -33,7 +31,7 @@ export default function Header() {
         <section className="header_icons">
           <a href="#"><img src="/img/search.svg" alt="search" className='icon-img'/></a>
           <a href="#"><img src="/img/user.svg" alt="user" className='icon-img'/></a>
-          <section><img src="/img/heart.svg" alt="heart" className='icon-img'/><span>{liked}</span></section>
+          <section><img src="/img/heart.svg" alt="heart" className='icon-img'/><span>{likedAmount}</span></section>
           <section><img src="/img/shopping-bag.svg" alt="shopping-bag" className='icon-img'/><span className='align-bottom'>{selected}</span></section>
         </section>
       </div>

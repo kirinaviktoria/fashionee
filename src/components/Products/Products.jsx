@@ -58,8 +58,6 @@ export default function Products() {
   const totalPages = products.length / PRODUCTS_PER_PAGE;
   let slisedCards = products.slice(firstIndex, lastIndex)
 
-    //!!запомнить в массив избранные товары
-
   //рабочая сортировка по всем карточкам
   const sorting = (sortMethod) => {
     if (sortMethod) {
@@ -125,6 +123,7 @@ export default function Products() {
     return filtered
   }
 
+  
   //!! Добавить функцию обработки фильтра и сортировки
   const filterCards = (sortMethod) => {
     let filtered = data.products

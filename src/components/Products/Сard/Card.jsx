@@ -1,31 +1,22 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useReducer, useState } from 'react'
 import './style.scss'
 import { ReactComponent as Sale } from '../../../img/sale.svg'
 import { ReactComponent as New } from '../../../img/new.svg'
 import { ReactComponent as Like } from '../../../img/like.svg'
+import { ACTIONS, initialState, reduser } from '../../../redusers/reducer'
 
-export default function Card({ product, likedCards }) {
-  const [like, setLike] = useState(false)
+
+export default function Card({ product }) {
+  const [state, dispatch] = useReducer(reduser, initialState)
+  const [like, setLike] = useState(state.like)
   const [add, setAdd] = useState(false)
-  // const likedProducts = []
- 
-
-  //!!состояние не меняется сразу после клика
-  const handleLikeClick = () => {
-    setLike(!like);
-    handleLikedCards(!like)
-  }
-
-  //!!как удалить ненужный элемент из массива и как удалить его из localStorage
-  const handleLikedCards = (like) => {
-    if (like) likedCards.push(product)
-
-    if(!localStorage.getItem('favourite')) localStorage.setItem('favourite', JSON.stringify(likedCards))
-    localStorage.setItem('favourite', JSON.stringify(likedCards))
-
-    console.log(likedCards)
-    console.log(like);
-  }
+  
+    //!!как удалить ненужный элемент из localStorage
+    useEffect(() => {
+      if (like) {
+        localStorage.setItem('favourite', JSON.stringify(state.amountLiked))
+      } 
+    }, [like])
 
   const addToCart = () => {
     setAdd(!add);
@@ -44,7 +35,13 @@ export default function Card({ product, likedCards }) {
           </div>
         }
 
-        <button onClick={() => handleLikeClick()} className='like'>
+        <button onClick={() => dispatch({
+            type: ACTIONS.LIKE_PRODUCTS,
+            payload: state.amountLiked.push(product),
+            liked: setLike(!like)
+          })} 
+        className='like'
+        >
           {<Like className={`${like ? 'active': ''}`} />}
         </button>
       </div>
