@@ -8,17 +8,16 @@ export const initialState = {
   liked: false
 }
 
-
 export const reduser = (state, action) => {
   switch (action.type) {
     case ACTIONS.LIKE_PRODUCTS:
       return {
         ...state,
-        // ...action.payload,
         amountLiked: [
           ...state.amountLiked,
           action.payload
-        ] 
+        ], 
+        // liked: state.liked
       };
         
     default:

@@ -7,12 +7,6 @@ export default function Header({likedAmount}) {
   // const liked = 0;
   const selected = 0;
 
-  // const [liked, setLiked] = useState(0)
-  // const [selected, setSelected] = useState(0)
-  // const { likedAmount } = useContext(ProductsContext)
-  // const { likedAmount } = useContext(ProductsContext)
-
-
   return (
     <div className='wrapper'>
       <div className="header__block">
