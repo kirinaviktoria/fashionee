@@ -1,10 +1,10 @@
-import React, { useState, useReducer, useEffect } from "react";
+import React, { useReducer } from "react";
 // import data from '../../products.json'
 import Header from "./components/Header/Header";
 import ShopPage from "./components/ShopPage/ShopPage";
 import Products from "./components/Products/Products";
 import {ProductsContext} from './context/ProductsContext'
-import { ACTIONS, initialState, reduser } from "./redusers/reducer";
+import { initialState, reduser } from "./redusers/reducer";
 import Footer from "./components/Footer/Footer"; 
 
 function App() {
@@ -14,6 +14,7 @@ function App() {
   // const [likedCards, setLikedCards] = useState(state.amountLiked.length)
   // let likedAmount = likedCards.length
   // const [liked, setLiked] = useState(0)
+
 
   return (
     <ProductsContext.Provider value={{state, dispatch}} >

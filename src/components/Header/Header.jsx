@@ -1,7 +1,7 @@
-import React, { useState, useContext } from 'react'
+import React  from 'react'
 import './style.css'
 import './style.scss'
-import { ProductsContext } from '../../context/ProductsContext';
+// import { ProductsContext } from '../../context/ProductsContext';
 
 export default function Header({likedAmount}) {
   // const liked = 0;
