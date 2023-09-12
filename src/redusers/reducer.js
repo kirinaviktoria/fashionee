@@ -10,7 +10,6 @@ export const initialState = {
 
 export const reduser = (state, action) => {
   switch (action.type) {
-    //разобраться, как добавить карточки в локалсторедж
     case ACTIONS.LIKE_PRODUCTS:
       return {
         ...state,

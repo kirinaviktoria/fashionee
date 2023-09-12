@@ -1,7 +1,6 @@
 import React  from 'react'
 import './style.css'
 import './style.scss'
-// import { ProductsContext } from '../../context/ProductsContext';
 
 export default function Header({likedAmount}) {
   // const liked = 0;

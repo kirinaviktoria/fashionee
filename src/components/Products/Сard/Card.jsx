@@ -11,7 +11,7 @@ export default function Card({ product }) {
   const [like, setLike] = useState(state.like)
   const [add, setAdd] = useState(false)
   
-    //!!как удалить ненужный элемент из localStorage
+    //!!как удалить ненужный элемент из localStorage и как добавить новый в уже заполненный
     useEffect(() => {
       if (like) {
         localStorage.setItem('favourite', JSON.stringify(state.amountLiked))

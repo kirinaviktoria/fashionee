@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import data from '../../products.json'
 import './style.scss'
 import Card from './Сard/Card';
@@ -6,18 +6,7 @@ import Pagination from '../Pagination/Pagination';
 import { ReactComponent as IconChecked } from '../../img/icon-check.svg';
 import { ReactComponent as Search } from '../../img/search.svg';
 
-// import {ProductsContext} from '../../context/ProductsContext'
-// import { ACTIONS, reduser, initialState } from '../../redusers/reducer';
-
 const PRODUCTS_PER_PAGE = 9
-
-const ACTIONS = {
-  // SET_PRODUCTS: 'set_products',
-  SORT_PRODUCTS: 'sort_products',
-  FILTER_PRODUCTS: 'filter_products',
-  LIKE_PRODUCTS: 'like_products',
-  ADD_PRODUCTS: 'add_products',
-}
 
 const SORTING = {
   RELEVANCE: 'relevance',
@@ -34,8 +23,6 @@ const CATEGORIES = {
   ACC: 'Accessories',
   NEW: 'New Arrivals'
 }
-
-// const sortOptions = [SORTING.RELEVANCE, SORTING.CHEAP, SORTING.EXPENSIVE, SORTING.NEW, SORTING.DISCOUNT]
 
 export default function Products() {
   const [products, setProducts] = useState(data.products)
@@ -58,73 +45,7 @@ export default function Products() {
   const totalPages = products.length / PRODUCTS_PER_PAGE;
   let slisedCards = products.slice(firstIndex, lastIndex)
 
-  //рабочая сортировка по всем карточкам
-  const sorting = (sortMethod) => {
-    if (sortMethod) {
-      switch (sortMethod) {
-        case SORTING.RELEVANCE:
-          setProducts(data.products.sort((prod1, prod2) => prod1.id > prod2.id ? 1 : -1))
-          break
-
-        case SORTING.CHEAP:
-          setProducts(data.products.sort((prod1, prod2) => prod1.price > prod2.price ? 1 : -1))
-          break
-
-        case SORTING.EXPENSIVE:
-          setProducts(data.products.sort((prod1, prod2) => prod1.price < prod2.price ? 1 : -1))
-          break
-
-        case SORTING.NEW:
-          setProducts(data.products.sort((prod1, prod2) => prod1.isNew < prod2.isNew ? 1 : -1))
-          break
-
-        case SORTING.DISCOUNT:
-          setProducts(data.products.sort((prod1, prod2) => prod1.isSale < prod2.isSale ? 1 : -1))
-          break
-
-        default:
-          setProducts(data.products)
-      }
-    }
-    return slisedCards = products.slice(firstIndex, lastIndex)
-  }
-
-  //рабочий фильтр через селект
-  const filtering = (filterMethod) => {
-    let filtered = []
-
-    switch (filterMethod) {
-      case CATEGORIES.ALL:
-        filtered = data.products
-        break
-
-      case CATEGORIES.MEN:
-        filtered = products.filter(prod => prod.categories.includes('Men'))
-        // console.log(filtered)
-        break
-
-      case CATEGORIES.WOMEN:
-        filtered = products.filter(prod => prod.categories.includes('Women'))
-        break
-
-      case CATEGORIES.ACC:
-        filtered = products.filter(prod => prod.categories.includes('Accessories'))
-        break
-
-      case CATEGORIES.NEW:
-        filtered = products.filter(prod => prod.isNew == 1)
-        break
-
-      default:
-        filtered = data.products
-    }
-
-    slisedCards = filtered.slice(firstIndex, lastIndex)
-    return filtered
-  }
-
   
-  //!! Добавить функцию обработки фильтра и сортировки
   const filterCards = (sortMethod) => {
     let filtered = data.products
     let sorted = []
@@ -135,11 +56,7 @@ export default function Products() {
       else if (filterAcc) filtered = data.products.filter(prod => prod.categories.includes('Accessories'))
       else if (filterNew) filtered = data.products.filter(prod => prod.isNew == 1)
       else if (filterAll) filtered = data.products
-      // else filtered = data.products
     }
-
-    // else filtered = data.products
-    // console.log(sortMethod);
 
     switch (sortMethod) {
       case SORTING.RELEVANCE:
