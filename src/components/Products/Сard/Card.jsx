@@ -10,13 +10,25 @@ export default function Card({ product }) {
   const [state, dispatch] = useReducer(reduser, initialState)
   const [like, setLike] = useState(state.like)
   const [add, setAdd] = useState(false)
+  // const likedProducts = []
+ 
 
-  //!!как удалить ненужный элемент из localStorage
-  useEffect(() => {
-    if (like) {
-      localStorage.setItem('favourite', JSON.stringify(state.amountLiked))
-    } 
-  }, [like])
+  //!!состояние не меняется сразу после клика
+  const handleLikeClick = () => {
+    setLike(!like);
+    handleLikedCards(!like)
+  }
+
+  //!!как удалить ненужный элемент из массива и как удалить его из localStorage
+  const handleLikedCards = (like) => {
+    if (like) likedCards.push(product)
+
+    if(!localStorage.getItem('favourite')) localStorage.setItem('favourite', JSON.stringify(likedCards))
+    localStorage.setItem('favourite', JSON.stringify(likedCards))
+
+    console.log(likedCards)
+    console.log(like);
+  }
 
   const addToCart = () => {
     setAdd(!add);

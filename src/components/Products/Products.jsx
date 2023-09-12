@@ -51,7 +51,6 @@ export default function Products() {
   const [colorYellow, setColorYellow] = useState(false)
   const [colorGreen, setColorGreen] = useState(false)
   const [curPage, setCurPage] = useState(1)
-  // const [likedCards, setLikedCards] = useState([])
   const likedCards = []
 
   const firstIndex = (curPage - 1) * PRODUCTS_PER_PAGE
