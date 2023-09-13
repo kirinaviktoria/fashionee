@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useDebugValue, useReducer } from "react";
 // import data from '../../products.json'
 import Header from "./components/Header/Header";
 import ShopPage from "./components/ShopPage/ShopPage";
@@ -15,11 +15,12 @@ function App() {
   // let likedAmount = likedCards.length
   // const [liked, setLiked] = useState(0)
 
+  useDebugValue(state.amountLiked)
 
   return (
     <ProductsContext.Provider value={{state, dispatch}} >
       <div className="App">
-        <Header likedAmount={state.amountLiked.length}/>
+        <Header />
         <div className="content"> 
           <ShopPage />
           <Products />
