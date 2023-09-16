@@ -10,6 +10,8 @@ export default function Card({ product }) {
   const [state, dispatch] = useReducer(reduser, initialState)
   const [like, setLike] = useState(state.like)
   const [add, setAdd] = useState(false)
+
+  
   
   //!!как удалить ненужный элемент из localStorage и как добавить новый в уже заполненный
   useEffect(() => {
@@ -37,6 +39,7 @@ export default function Card({ product }) {
 
         <button onClick={() => dispatch({
             type: ACTIONS.LIKE_PRODUCTS,
+            // payload: state.amountLiked.push(product),
             payload: state.amountLiked.push(product),
             liked: setLike(!like)
           })} 

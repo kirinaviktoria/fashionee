@@ -15,6 +15,7 @@ export const reduser = (state, action) => {
         ...state,
         amountLiked: [
           ...state.amountLiked,
+          // action.payload
           action.payload
         ], 
         // liked: state.liked

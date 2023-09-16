@@ -54,7 +54,7 @@ export default function Products() {
       if (filterMen) filtered = data.products.filter(prod => prod.categories.includes('Men'))
       else if (filterWomen) filtered = data.products.filter(prod => prod.categories.includes('Women'))
       else if (filterAcc) filtered = data.products.filter(prod => prod.categories.includes('Accessories'))
-      else if (filterNew) filtered = data.products.filter(prod => prod.isNew == 1)
+      else if (filterNew) filtered = data.products.filter(prod => prod.isNew === 1)
       else if (filterAll) filtered = data.products
     }
 
