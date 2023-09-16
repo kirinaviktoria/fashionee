@@ -1,4 +1,4 @@
-import React, { useDebugValue, useReducer } from "react";
+import React, { useDebugValue, useReducer, useState, useEffect } from "react";
 // import data from '../../products.json'
 import Header from "./components/Header/Header";
 import ShopPage from "./components/ShopPage/ShopPage";
@@ -22,6 +22,7 @@ function App() {
 
   useDebugValue(state.amountLiked)
 
+  
   return (
     <ProductsContext.Provider value={{state, dispatch}} >
       <div className="App">
