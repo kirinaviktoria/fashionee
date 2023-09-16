@@ -18,7 +18,7 @@ export const reduser = (state, action) => {
           // action.payload
           action.payload
         ], 
-        // liked: state.liked
+        liked: state.liked
       };
         
     default:

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import data from '../../products.json'
+import { FAVOURITES_KEY } from '../constants/localStorage';
 import './style.scss'
 import Card from './Сard/Card';
 import Pagination from '../Pagination/Pagination';
@@ -24,8 +25,9 @@ const CATEGORIES = {
   NEW: 'New Arrivals'
 }
 
-export default function Products() {
-  const [products, setProducts] = useState(data.products)
+export default function Products({ dataProducts }) {
+  // const [products, setProducts] = useState(data.products)
+  const [products, setProducts] = useState(dataProducts)
   const [sortMethod, setSortMethod] = useState(SORTING.RELEVANCE)
   const [filterAll, setFilterAll] = useState(true)
   const [filterMen, setFilterMen] = useState(false)
@@ -38,24 +40,26 @@ export default function Products() {
   const [colorYellow, setColorYellow] = useState(false)
   const [colorGreen, setColorGreen] = useState(false)
   const [curPage, setCurPage] = useState(1)
-  const likedCards = []
+
+  // const [like, setLike] = useState(0)
+  
+  // let likedCards = []
 
   const firstIndex = (curPage - 1) * PRODUCTS_PER_PAGE
   const lastIndex = firstIndex + PRODUCTS_PER_PAGE
   const totalPages = products.length / PRODUCTS_PER_PAGE;
   let slisedCards = products.slice(firstIndex, lastIndex)
 
-  
   const filterCards = (sortMethod) => {
-    let filtered = data.products
+    let filtered = products
     let sorted = []
 
     if (filterAll || filterMen || filterWomen || filterAcc || filterNew || sortMethod) {
-      if (filterMen) filtered = data.products.filter(prod => prod.categories.includes('Men'))
-      else if (filterWomen) filtered = data.products.filter(prod => prod.categories.includes('Women'))
-      else if (filterAcc) filtered = data.products.filter(prod => prod.categories.includes('Accessories'))
-      else if (filterNew) filtered = data.products.filter(prod => prod.isNew === 1)
-      else if (filterAll) filtered = data.products
+      if (filterMen) filtered = products.filter(prod => prod.categories.includes('Men'))
+      else if (filterWomen) filtered = products.filter(prod => prod.categories.includes('Women'))
+      else if (filterAcc) filtered = products.filter(prod => prod.categories.includes('Accessories'))
+      else if (filterNew) filtered = products.filter(prod => prod.isNew === 1)
+      else if (filterAll) filtered = products
     }
 
     switch (sortMethod) {
@@ -88,6 +92,7 @@ export default function Products() {
     return sorted
   }
 
+
   useEffect(() => {
     setProducts(filterCards(sortMethod))
   }, [filterAll, filterMen, filterWomen, filterAcc, filterNew, sortMethod])
@@ -95,6 +100,61 @@ export default function Products() {
   const changeCurPage = (page) => {
     setCurPage(page)
   }
+
+  const [likedCards, setLikedCards] = useState([])
+
+  //функция добавления/удаления избранных товаров в LS
+  const toggleFavourite = (toggleProduct) => {
+    // setLike(!like)
+    //получаем товары из localStorage на данный момент
+    const likedInLS = localStorage.getItem(FAVOURITES_KEY)
+    
+    //если localStorage пустой, вносим текущий товар
+    if (!likedInLS) {
+      setLikedCards([toggleProduct])
+      // likedCards.push([toggleProduct])
+      localStorage.setItem(FAVOURITES_KEY, JSON.stringify([toggleProduct]))
+      return
+    }
+
+    //парсим полученный localStorage
+    const liked = JSON.parse(likedInLS) 
+    //находим текущий товар в localStorage
+    const inLS = liked.find((product) => product.id === toggleProduct.id)
+
+    //если текущий товар найден
+    if (inLS) {
+      //delete from LS
+      const filteredLiked = liked.filter((product) => product.id !== toggleProduct.id)
+      setLikedCards(filteredLiked)
+      // likedCards = filteredLiked
+      localStorage.setItem(FAVOURITES_KEY, JSON.stringify(filteredLiked))
+      return
+    }
+
+    //если текущий товар не найден
+    //add to LS
+    liked.push(toggleProduct)
+    setLikedCards(liked)
+    // likedCards = liked
+    localStorage.setItem(FAVOURITES_KEY, JSON.stringify(liked))
+  }
+
+
+  useEffect(() => {
+    //получаем товары из localStorage на данный момент
+    const likedInLS = localStorage.getItem(FAVOURITES_KEY)
+
+    if(likedInLS) {
+      const likedProducts = JSON.parse(likedInLS)
+      setLikedCards(likedProducts.map((prod) => prod.id))
+      // likedCards = likedProducts.map((prod) => prod.id)
+      console.log('likedProducts: ', likedProducts)
+    }
+
+    console.log('likedCards: ', likedCards) 
+    // console.log(likedCards.includes(2))   
+  }, [])
 
   return (
     <section className='wrapper blocks'>
@@ -263,12 +323,18 @@ export default function Products() {
 
         <div className="sidebar-block sale-banner">
           <div className='sale-inner'>
-            <div className='header'><p className='header-first'>SEASON</p>SALE</div>
+            <div className='header'>
+              <p className='header-first'>
+                SEASON
+              </p>
+              SALE
+            </div>
 
-            <p className='sale-content'>Non aliqua reprehenderit
+            <p className='sale-content'>
+              Non aliqua reprehenderit
               reprehenderit culpa
-              laboris nulla</p>
-
+              laboris nulla
+            </p>
             <p className='target'>Shop Now</p>
 
           </div>
@@ -298,7 +364,15 @@ export default function Products() {
 
         <div className='cards'>
           {
-            products.length && slisedCards.map((product) => <Card key={product.id} product={product} likedCards={likedCards} />)
+            products.length && slisedCards.map((product) => (
+              <Card 
+                key={product.id} 
+                product={product} 
+                toggleFavourite={toggleFavourite}
+                inFavourites={likedCards.includes(product.id)}
+                // like={like}
+              />
+            ))
           }
         </div>
 

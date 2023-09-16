@@ -6,19 +6,20 @@ import { ReactComponent as Like } from '../../../img/like.svg'
 import { ACTIONS, initialState, reduser } from '../../../redusers/reducer'
 
 
-export default function Card({ product }) {
+export default function Card({ product, toggleFavourite, inFavourites }) {
   const [state, dispatch] = useReducer(reduser, initialState)
   const [like, setLike] = useState(state.like)
   const [add, setAdd] = useState(false)
-
   
   
   //!!как удалить ненужный элемент из localStorage и как добавить новый в уже заполненный
-  useEffect(() => {
-    if (like) {
-      localStorage.setItem('favourite', JSON.stringify(state.amountLiked))
-    }
-  }, [like])
+  // useEffect(() => {
+  //   if (like) {
+  //     localStorage.setItem('favourite', JSON.stringify(state.amountLiked))
+  //   }
+      
+  // }, [like])
+
 
   const addToCart = () => {
     setAdd(!add);
@@ -37,7 +38,7 @@ export default function Card({ product }) {
           </div>
         }
 
-        <button onClick={() => dispatch({
+        {/* <button onClick={() => dispatch({
             type: ACTIONS.LIKE_PRODUCTS,
             // payload: state.amountLiked.push(product),
             payload: state.amountLiked.push(product),
@@ -46,7 +47,21 @@ export default function Card({ product }) {
         className='like'
         >
           {<Like className={`${like ? 'active': ''}`} />}
-        </button>
+        </button> */}
+
+        {/* <button onClick={() => {
+          // toggleFavourite(product.id)
+          toggleFavourite(product)
+          // setLike(!like)
+        }}
+          className='like'
+        >
+            {<Like className={`${inFavourites ? 'active': ''}`} />}
+        </button> */}
+
+        <div onClick={() => toggleFavourite(product)} className='like'>
+         {<Like className={`${inFavourites ? 'active': ''}`} />}
+        </div>
       </div>
 
       <div className='card-info'>

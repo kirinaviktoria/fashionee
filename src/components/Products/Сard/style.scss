@@ -36,7 +36,14 @@ button {
     .like {
       position: absolute;
       right: 20px;
-      top: 20px;   
+      top: 20px;  
+      cursor: pointer; 
+
+      &:hover {
+        path {
+          fill: #FF8E8E;
+        }
+      }
     }
 
     .active path {
