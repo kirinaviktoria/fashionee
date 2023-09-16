@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 // import data from '../../products.json'
 import Header from "./components/Header/Header";
 import ShopPage from "./components/ShopPage/ShopPage";
@@ -13,13 +13,18 @@ function App() {
   // const [products, setProducts] = useState(data.products)
   // const [likedCards, setLikedCards] = useState(state.amountLiked.length)
   // let likedAmount = likedCards.length
-  // const [liked, setLiked] = useState(0)
+  const [liked, setLiked] = useState(0)
+
+  useEffect(() => {
+    setLiked(state.amountLiked.length)
+    console.log('state: ', state.amountLiked.length)
+  }, [dispatch])
 
 
   return (
     <ProductsContext.Provider value={{state, dispatch}} >
       <div className="App">
-        <Header likedAmount={state.amountLiked.length}/>
+        <Header likedAmount={liked}/>
         <div className="content"> 
           <ShopPage />
           <Products />
@@ -27,7 +32,6 @@ function App() {
         <Footer/>
       </div>
      </ProductsContext.Provider>
-
   );
 }
 
