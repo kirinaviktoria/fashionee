@@ -49,16 +49,6 @@ export default function Card({ product, toggleFavourite, inFavourites }) {
           {<Like className={`${like ? 'active': ''}`} />}
         </button> */}
 
-        {/* <button onClick={() => {
-          // toggleFavourite(product.id)
-          toggleFavourite(product)
-          // setLike(!like)
-        }}
-          className='like'
-        >
-            {<Like className={`${inFavourites ? 'active': ''}`} />}
-        </button> */}
-
         <div onClick={() => toggleFavourite(product)} className='like'>
          {<Like className={`${inFavourites ? 'active': ''}`} />}
         </div>
@@ -68,7 +58,6 @@ export default function Card({ product, toggleFavourite, inFavourites }) {
         <p className='item-name'>
           {product.name}
         </p>
-
 
         <div className='card-bottom'>
           <div className='prices'>
