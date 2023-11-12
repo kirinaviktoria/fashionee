@@ -1,6 +1,4 @@
-$red: #FF8E8E;
-$dark-grey: #444444;
-$light-grey: #BCBCBC;
+@import '../constants/global.scss';
 
 .blocks {
   display: flex;
