@@ -3,7 +3,7 @@ import './style.scss'
 import { ReactComponent as Sale } from '../../../img/sale.svg'
 import { ReactComponent as New } from '../../../img/new.svg'
 import { ReactComponent as Like } from '../../../img/like.svg'
-import { ACTIONS, initialState, reduser } from '../../../redusers/reducer'
+import { ACTIONS, initialState, reduser } from '../../../reducers/reducer'
 
 
 export default function Card({ product, toggleFavourite, inFavourites }) {

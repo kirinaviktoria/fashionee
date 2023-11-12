@@ -25,6 +25,8 @@ const CATEGORIES = {
   NEW: 'New Arrivals'
 }
 
+
+
 export default function Products({ dataProducts }) {
   // const [products, setProducts] = useState(data.products)
   const [products, setProducts] = useState(dataProducts)
@@ -41,9 +43,26 @@ export default function Products({ dataProducts }) {
   const [colorGreen, setColorGreen] = useState(false)
   const [curPage, setCurPage] = useState(1)
 
+  const [categoriesArr, setCategoriesArr] = useState([])
+
   // const [like, setLike] = useState(0)
   
   // let likedCards = []
+
+  useEffect(() => {
+    let newArr = []
+
+    newArr = dataProducts.map(item => {
+     return item.categories
+    })
+
+    newArr = newArr.flat(2).sort().map(item => {return item !== item + 1 ? item : ''})
+
+    setCategoriesArr(newArr)
+  }, [])
+
+  // generateCategories(dataProducts)
+  // console.log('categoriesArr:', categoriesArr);
 
   const firstIndex = (curPage - 1) * PRODUCTS_PER_PAGE
   const lastIndex = firstIndex + PRODUCTS_PER_PAGE
@@ -92,7 +111,6 @@ export default function Products({ dataProducts }) {
     return sorted
   }
 
-
   useEffect(() => {
     setProducts(filterCards(sortMethod))
   }, [filterAll, filterMen, filterWomen, filterAcc, filterNew, sortMethod])
@@ -140,7 +158,6 @@ export default function Products({ dataProducts }) {
     localStorage.setItem(FAVOURITES_KEY, JSON.stringify(liked))
   }
 
-
   useEffect(() => {
     //получаем товары из localStorage на данный момент
     const likedInLS = localStorage.getItem(FAVOURITES_KEY)
@@ -149,10 +166,10 @@ export default function Products({ dataProducts }) {
       const likedProducts = JSON.parse(likedInLS)
       setLikedCards(likedProducts.map((prod) => prod.id))
       // likedCards = likedProducts.map((prod) => prod.id)
-      console.log('likedProducts: ', likedProducts)
+      // console.log('likedProducts: ', likedProducts)
     }
 
-    console.log('likedCards: ', likedCards) 
+    // console.log('likedCards: ', likedCards) 
     // console.log(likedCards.includes(2))   
   }, [])
 

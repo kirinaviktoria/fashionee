@@ -1,10 +1,7 @@
+@import '../constants/global.scss';
+
 *{
   box-sizing: border-box;
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
 }
 
 .header__block {
@@ -52,10 +49,13 @@ a {
 
       .nav_elem{
         list-style-type: none;
+        cursor: pointer;
       }
       
       .nav_elem:hover{
-        color: #FF8E8E;
+        color: $red;
+        // color: #FF8E8E;
+        // @include red;
       }
     }
   }
@@ -72,12 +72,12 @@ a {
     .icon-img {
       display: flex;
       align-self: center;
+      cursor: pointer;
     }
 
     section {
       display: flex;
       gap: 4px;
-      cursor: pointer;
 
       span {
         display: flex;

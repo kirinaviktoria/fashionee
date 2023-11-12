@@ -1,3 +1,5 @@
+@import '../../constants/global.scss';
+
 button {
   border: none;
   background-color: transparent;
@@ -41,13 +43,13 @@ button {
 
       &:hover {
         path {
-          fill: #FF8E8E;
+          fill: $red;
         }
       }
     }
 
     .active path {
-      fill: #FF8E8E;
+      fill: $red;
     }
   }
 
@@ -57,7 +59,7 @@ button {
     flex-direction: column;
     justify-content: space-between;
     gap: 9px;
-    color: #444444;
+    color: $dark-grey;
 
     .item-name {
       font-weight: normal;
@@ -91,7 +93,7 @@ button {
         max-width: 40px;
         width: 100%;
         border-radius: 10px;
-        background-color: #95CCB5;
+        background-color: $light-green;
         color: #fff;
         font-size: 24px;
         align-items: center;
@@ -99,11 +101,11 @@ button {
       }
 
       .added {
-        background-color: #4c7d69;
+        background-color: $dark-green;
       }
 
       .addBtn:hover {
-        background-color: #4c7d69;
+        background-color: $dark-green;
       }
     }
   }

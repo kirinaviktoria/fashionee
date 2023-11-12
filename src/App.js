@@ -1,11 +1,11 @@
 import React, { useDebugValue, useReducer, useState, useEffect } from "react";
 import data from './products.json'
-import { FAVOURITES_KEY } from './components/constants/localStorage'
+// import { FAVOURITES_KEY } from './components/constants/localStorage'
 import Header from "./components/Header/Header";
 import ShopPage from "./components/ShopPage/ShopPage";
 import Products from "./components/Products/Products";
 import {ProductsContext} from './context/ProductsContext'
-import { initialState, reduser } from "./redusers/reducer";
+import { initialState, reduser } from "./reducers/reducer";
 import Footer from "./components/Footer/Footer"; 
 
 function App() {
