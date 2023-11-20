@@ -25,17 +25,11 @@ const CATEGORIES = {
   NEW: 'New Arrivals'
 }
 
-
-
 export default function Products({ dataProducts }) {
-  // const [products, setProducts] = useState(data.products)
   const [products, setProducts] = useState(dataProducts)
   const [sortMethod, setSortMethod] = useState(SORTING.RELEVANCE)
-  const [filterAll, setFilterAll] = useState(true)
-  const [filterMen, setFilterMen] = useState(false)
-  const [filterWomen, setFilterWomen] = useState(false)
-  const [filterAcc, setFilterAcc] = useState(false)
-  const [filterNew, setFilterNew] = useState(false)
+  const [filterMethod, setFilterMethod] = useState(CATEGORIES.ALL)
+
   const [colorBlack, setColorBlack] = useState(false)
   const [colorBlue, setColorBlue] = useState(false)
   const [colorRed, setColorRed] = useState(false)
@@ -43,23 +37,28 @@ export default function Products({ dataProducts }) {
   const [colorGreen, setColorGreen] = useState(false)
   const [curPage, setCurPage] = useState(1)
 
+  const [active, setActive] = useState(false)
+
+  // const [likedCards, setLikedCards] = useState([])
+  const [productsInLS, setProductsInLS] = useState([])
+
   const [categoriesArr, setCategoriesArr] = useState([])
 
   // const [like, setLike] = useState(0)
   
   // let likedCards = []
 
-  useEffect(() => {
-    let newArr = []
+  // useEffect(() => {
+  //   let newArr = []
 
-    newArr = dataProducts.map(item => {
-     return item.categories
-    })
+  //   newArr = dataProducts.map(item => {
+  //    return item.categories
+  //   })
 
-    newArr = newArr.flat(2).sort().map(item => {return item !== item + 1 ? item : ''})
+  //   newArr = newArr.flat(2).sort().map(item => {return item !== item + 1 ? item : ''})
 
-    setCategoriesArr(newArr)
-  }, [])
+  //   setCategoriesArr(newArr)
+  // }, [])
 
   // generateCategories(dataProducts)
   // console.log('categoriesArr:', categoriesArr);
@@ -69,108 +68,146 @@ export default function Products({ dataProducts }) {
   const totalPages = products.length / PRODUCTS_PER_PAGE;
   let slisedCards = products.slice(firstIndex, lastIndex)
 
-  const filterCards = (sortMethod) => {
-    let filtered = products
-    let sorted = []
-
-    if (filterAll || filterMen || filterWomen || filterAcc || filterNew || sortMethod) {
-      if (filterMen) filtered = dataProducts.filter(prod => prod.categories.includes('Men'))
-      else if (filterWomen) filtered = dataProducts.filter(prod => prod.categories.includes('Women'))
-      else if (filterAcc) filtered = dataProducts.filter(prod => prod.categories.includes('Accessories'))
-      else if (filterNew) filtered = dataProducts.filter(prod => prod.isNew === true)
-      else if (filterAll) filtered = dataProducts
-    }
+  const sortProducts = (sortMethod) => {
+    let sorted = [...products]
 
     switch (sortMethod) {
       case SORTING.RELEVANCE:
-        sorted = filtered.sort((prod1, prod2) => prod1.id > prod2.id ? 1 : -1)
+        sorted.sort((prod1, prod2) => prod1.id > prod2.id ? 1 : -1)
         break
 
       case SORTING.CHEAP:
-        sorted = filtered.sort((prod1, prod2) => prod1.price > prod2.price ? 1 : -1)
+        sorted.sort((prod1, prod2) => prod1.price > prod2.price ? 1 : -1)
         break
 
       case SORTING.EXPENSIVE:
-        sorted = filtered.sort((prod1, prod2) => prod1.price < prod2.price ? 1 : -1)
+        sorted.sort((prod1, prod2) => prod1.price < prod2.price ? 1 : -1)
         break
 
       case SORTING.NEW:
-        sorted = filtered.sort((prod1, prod2) => prod1.isNew < prod2.isNew ? 1 : -1)
+        sorted.sort((prod1, prod2) => prod1.isNew < prod2.isNew ? 1 : -1)
         break
 
       case SORTING.DISCOUNT:
-        sorted = filtered.sort((prod1, prod2) => prod1.isSale < prod2.isSale ? 1 : -1)
+        sorted.sort((prod1, prod2) => prod1.isSale < prod2.isSale ? 1 : -1)
         break
 
       default:
-        sorted = filtered
+        return sorted
     }
 
     slisedCards = sorted.slice(firstIndex, lastIndex)
-
     return sorted
   }
 
-  useEffect(() => {
-    setProducts(filterCards(sortMethod))
-  }, [filterAll, filterMen, filterWomen, filterAcc, filterNew, sortMethod])
+
+  const filterProducts = (filterMethod) => {
+    let filtered = [...products]
+
+    if (filterMethod === 'All') {
+      filtered = dataProducts
+    } 
+    else if (filterMethod === 'New Arrivals') {
+      filtered = dataProducts.filter(prod => prod.isNew === true)
+    }
+    else {
+      filtered = dataProducts.filter(prod => prod.categories.includes(filterMethod));
+    }
+  
+      // switch (filterMethod) {
+      //   case CATEGORIES.ALL:
+      //     filtered = dataProducts
+      //     break
+
+      //   case CATEGORIES.MEN:
+      //     filtered = dataProducts.filter(prod => prod.categories.includes(filterMethod));
+      //     break
+
+      //   case CATEGORIES.WOMEN:
+      //     filtered = dataProducts.filter(prod => prod.categories.includes('Women'))
+      //     break 
+
+      //   case CATEGORIES.ACC:
+      //     filtered = dataProducts.filter(prod => prod.categories.includes('Accessories'))
+      //     break 
+
+      //   case CATEGORIES.NEW:
+      //     filtered = dataProducts.filter(prod => prod.isNew === true)
+      //     break  
+      // }
+
+      slisedCards = filtered.slice(firstIndex, lastIndex)
+      return filtered
+  }
+
+  const onSortChange = (method) => {
+    setSortMethod(method)
+    setProducts(sortProducts(method))
+  }
+
+  const onFilterChange = (method) => {
+    setFilterMethod(method)
+    setProducts(filterProducts(method))
+  }
 
   const changeCurPage = (page) => {
     setCurPage(page)
   }
 
-  const [likedCards, setLikedCards] = useState([])
-
   //функция добавления/удаления избранных товаров в LS
   const toggleFavourite = (toggleProduct) => {
-    // setLike(!like)
     //получаем товары из localStorage на данный момент
     const likedInLS = localStorage.getItem(FAVOURITES_KEY)
     
     //если localStorage пустой, вносим текущий товар
     if (!likedInLS) {
-      setLikedCards([toggleProduct])
-      // likedCards.push([toggleProduct])
-      localStorage.setItem(FAVOURITES_KEY, JSON.stringify([toggleProduct]))
+              //тут я пыталась добавить в LS все данные о продукте, тогда кнопка лайка не обновлялась сразу, а только после обновления страницы
+              // setProductsInLS([toggleProduct])
+      setProductsInLS([toggleProduct.id])
+              //тут я пыталась добавить в LS все данные о продукте, тогда кнопка лайка не обновлялась сразу, а только после обновления страницы
+              // localStorage.setItem(FAVOURITES_KEY, JSON.stringify([toggleProduct]))
+      localStorage.setItem(FAVOURITES_KEY, JSON.stringify([toggleProduct.id]))
       return
     }
 
     //парсим полученный localStorage
     const liked = JSON.parse(likedInLS) 
     //находим текущий товар в localStorage
-    const inLS = liked.find((product) => product.id === toggleProduct.id)
+        //тут я пыталась добавить в LS все данные о продукте, тогда кнопка лайка не обновлялась сразу, а только после обновления страницы
+        // const inLS = liked.find((product) => product.id === toggleProduct.id) 
+    const inLS = liked.find((id) => id === toggleProduct.id)
 
     //если текущий товар найден
     if (inLS) {
       //delete from LS
-      const filteredLiked = liked.filter((product) => product.id !== toggleProduct.id)
-      setLikedCards(filteredLiked)
-      // likedCards = filteredLiked
+          //тут я пыталась добавить в LS все данные о продукте, тогда кнопка лайка не обновлялась сразу, а только после обновления страницы
+          // const filteredLiked = liked.filter((product) => product.id !== toggleProduct.id)
+      const filteredLiked = liked.filter((id) => id !== toggleProduct.id)
+      setProductsInLS(filteredLiked)
       localStorage.setItem(FAVOURITES_KEY, JSON.stringify(filteredLiked))
       return
     }
 
     //если текущий товар не найден
     //add to LS
-    liked.push(toggleProduct)
-    setLikedCards(liked)
-    // likedCards = liked
+        //тут я пыталась добавить в LS все данные о продукте, тогда кнопка лайка не обновлялась сразу, а только после обновления страницы
+        // liked.push(toggleProduct)
+    liked.push(toggleProduct.id)
+    setProductsInLS(liked)
     localStorage.setItem(FAVOURITES_KEY, JSON.stringify(liked))
   }
 
+  //эффект для отслеживания избранных товаров для отображения лайков на карточках
   useEffect(() => {
     //получаем товары из localStorage на данный момент
     const likedInLS = localStorage.getItem(FAVOURITES_KEY)
 
     if(likedInLS) {
       const likedProducts = JSON.parse(likedInLS)
-      setLikedCards(likedProducts.map((prod) => prod.id))
-      // likedCards = likedProducts.map((prod) => prod.id)
-      // console.log('likedProducts: ', likedProducts)
+          //тут я пыталась добавить в LS все данные о продукте, тогда кнопка лайка не обновлялась сразу, а только после обновления страницы
+          // setProductsInLS(likedProducts.map((prod) => prod.id))
+      setProductsInLS(likedProducts.map((id) => id))
     }
-
-    // console.log('likedCards: ', likedCards) 
-    // console.log(likedCards.includes(2))   
   }, [])
 
   return (
@@ -184,70 +221,40 @@ export default function Products({ dataProducts }) {
         <div className="sidebar-block categories">
           <h3>Categories</h3>
           <div className="content">
-            <p className={`filterCat ${filterAll && 'active'}`}
+            <button className={`filterCat ${filterMethod === CATEGORIES.ALL && 'active'}`}
               value={CATEGORIES.ALL}
-              onClick={() => {
-                setFilterAll(!filterAll)
-                setFilterMen(false)
-                setFilterWomen(false)
-                setFilterAcc(false)
-                setFilterNew(false)
-              }}
+              onClick={(e) => onFilterChange(e.target.value)}
             >
             {CATEGORIES.ALL}
-            </p>
+            </button>
 
-            <p className={`filterCat ${filterMen && 'active'}`} 
+            <button className={`filterCat ${filterMethod === CATEGORIES.MEN && 'active'}`} 
               value={CATEGORIES.MEN}
-              onClick={() => {
-                setFilterMen(!filterMen)
-                setFilterAll(false)
-                setFilterWomen(false)
-                setFilterAcc(false)
-                setFilterNew(false)
-              }}
+              onClick={(e) => onFilterChange(e.target.value)}
             >
             {CATEGORIES.MEN}
-            </p>
+            </button>
 
-            <p className={`filterCat ${filterWomen && 'active'}`}  
+            <button className={`filterCat ${filterMethod === CATEGORIES.WOMEN && 'active'}`}  
               value={CATEGORIES.WOMEN}
-              onClick={() => {
-                setFilterWomen(!filterWomen)
-                setFilterMen(false)
-                setFilterAll(false)
-                setFilterAcc(false)
-                setFilterNew(false)
-              }}
+              onClick={(e) => onFilterChange(e.target.value)}
             >
             {CATEGORIES.WOMEN}
-            </p>
+            </button>
 
-            <p className={`filterCat ${filterAcc && 'active'}`}  
+            <button className={`filterCat ${filterMethod === CATEGORIES.ACC && 'active'}`}  
               value={CATEGORIES.ACC}
-              onClick={() => {
-                setFilterAcc(!filterAcc)
-                setFilterMen(false)
-                setFilterWomen(false)
-                setFilterAll(false)
-                setFilterNew(false)
-              }}
+              onClick={(e) => onFilterChange(e.target.value)}
             >
             {CATEGORIES.ACC}
-            </p>
+            </button>
 
-            <p className={`filterCat ${filterNew && 'active'}`}  
+            <button className={`filterCat ${filterMethod === CATEGORIES.NEW && 'active'}`}  
               value={CATEGORIES.NEW}
-              onClick={() => {
-                setFilterNew(!filterNew)
-                setFilterMen(false)
-                setFilterWomen(false)
-                setFilterAcc(false)
-                setFilterAll(false)
-              }}
+              onClick={(e) => onFilterChange(e.target.value)}
             >
             {CATEGORIES.NEW}
-            </p>
+            </button>
           </div>       
         </div>
 
@@ -363,11 +370,12 @@ export default function Products({ dataProducts }) {
         <div className='header'>
           <div className='amount'>
             <p>There are <span>{products.length}</span> products in this category</p>
-            <p>SORT METHOD: {sortMethod}</p>
+            {/* <p>SORT METHOD: {sortMethod}</p>
+            <p>FILTER METHOD: {filterMethod}</p> */}
           </div>
 
           <div className='sort'>
-            <select value={sortMethod} className='select' onChange={e => setSortMethod(e.target.value)}>
+            <select value={sortMethod} className='select' onChange={e => onSortChange(e.target.value)}>
               <option value={SORTING.RELEVANCE}>By relevance</option>
               <option value={SORTING.CHEAP}>From cheap to expensive</option>
               <option value={SORTING.EXPENSIVE}>From expensive to cheap</option>
@@ -386,8 +394,7 @@ export default function Products({ dataProducts }) {
                 key={product.id} 
                 product={product} 
                 toggleFavourite={toggleFavourite}
-                inFavourites={likedCards.includes(product.id)}
-                // like={like}
+                inFavourites={productsInLS.includes(product.id)}
               />
             ))
           }

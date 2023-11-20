@@ -33,6 +33,7 @@ export default function Header() {
           <img src="/img/search.svg" alt="search" className='icon-img'/>
           <img src="/img/user.svg" alt="user" className='icon-img'/>
           <section><img src="/img/heart.svg" alt="heart" className='icon-img'/><span>{state.amountLiked.length}</span></section>
+          {/* <section><img src="/img/heart.svg" alt="heart" className='icon-img'/><span>{likedProduts}</span></section> */}
           <section><img src="/img/shopping-bag.svg" alt="shopping-bag" className='icon-img'/><span className='align-bottom'>{selected}</span></section>
         </section>
       </div>
