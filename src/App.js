@@ -1,4 +1,4 @@
-import React, { useDebugValue, useReducer, useState, useEffect } from "react";
+import React, { useDebugValue, useReducer, useState } from "react";
 import data from './products.json'
 // import { FAVOURITES_KEY } from './components/constants/localStorage'
 import Header from "./components/Header/Header";
@@ -14,7 +14,8 @@ function App() {
 
   const [state, dispatch] = useReducer(reduser, initialState)
 
-  useDebugValue(state.amountLiked)
+  // useDebugValue(state.amountLiked)
+
   
   return (
     <ProductsContext.Provider value={{state, dispatch}} >
