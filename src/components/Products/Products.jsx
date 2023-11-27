@@ -4,18 +4,11 @@ import { FAVOURITES_KEY } from '../constants/localStorage';
 import './style.scss'
 import Card from './Сard/Card';
 import Pagination from '../Pagination/Pagination';
+import { SORTING } from '../constants/localStorage';
 import { ReactComponent as IconChecked } from '../../img/icon-check.svg';
 import { ReactComponent as Search } from '../../img/search.svg';
 
 const PRODUCTS_PER_PAGE = 9
-
-const SORTING = {
-  RELEVANCE: 'relevance',
-  CHEAP: 'cheap',
-  EXPENSIVE: 'expensive',
-  NEW: 'new',
-  DISCOUNT: 'discount'
-}
 
 const CATEGORIES = {
   ALL: 'All',
@@ -212,7 +205,7 @@ export default function Products({ dataProducts }) {
 
   return (
     <section className='wrapper blocks'>
-      <section className='sidebar'>
+      <section className='sidebar'> 
         <div className="sidebar-block search">
           <input type="text" className='search' placeholder='Search' />
           <span className='icon-send'> <Search /> </span>
